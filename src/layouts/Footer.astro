@@ -1,0 +1,44 @@
+---
+import { links } from "#components/Navbar/Navbar.astro";
+import Navlink from "#components/Navbar/Navlink.astro";
+import logo from "#assets/icons/logo.svg";
+import Image from "astro/components/Image.astro";
+---
+
+<footer class="bg-secondary text-primary py-16">
+  <section
+    class="flex flex-col sm:flex-row gap-10 sm:justify-between max-w-[1500px] mx-auto px-5 sm:px-10 items-center sm:items-start text-center"
+  >
+    <div class="text-2xl flex flex-col gap-4">
+      <p>Nairobi, Kenya</p>
+      <a href="tel:+254723456789">+254 723456789</a>
+    </div>
+
+    <nav>
+      <ul class="flex flex-col gap-4 mr-0 sm:mr-20">
+        {
+          links.map((l) => (
+            <li>
+              <Navlink title={l.title} href={l.href} />
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </section>
+
+  <section
+    class="flex flex-col sm:flex-row gap-10 max-w-[1500px] mx-auto px-5 sm:px-10 items-center sm:items-start mt-16 text-center"
+  >
+    <Image src={logo} alt="Company logo" class="w-44 hidden sm:block" />
+
+    <p class="mx-auto transform sm:-translate-x-20">
+      Copyright © <span id="current-year">0</span> Kinyanjui Njeru & Co Advocates
+    </p>
+  </section>
+</footer>
+
+<script is:inline>
+  document.getElementById("current-year").textContent =
+    new Date().getFullYear();
+</script>

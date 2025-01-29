@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import Navbar from "#components/Navbar/Navbar.astro";
+import Footer from "./Footer.astro";
 
 interface Props {
   title: string;
@@ -37,6 +38,7 @@ const { title, description, type, image } = Astro.props;
   <body>
     <slot />
   </body>
+  <Footer />
 </html>
 <style is:global>
   @tailwind base;
