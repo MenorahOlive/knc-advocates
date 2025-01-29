@@ -1,9 +1,8 @@
 ---
-import type { NavLinkProps } from "./Navlinks.astro";
-import Navlinks from "./Navlinks.astro";
 import Image from "astro/components/Image.astro";
 import chevron from "#assets/icons/chevron.png";
-import logo from "#assets/images/logo.png";
+import logo from "#assets/icons/logo.svg";
+import Navlink, { type NavLinkProps } from "./Navlink.astro";
 
 const links: NavLinkProps[] = [
   { title: "About", href: "/about" },
@@ -14,6 +13,12 @@ const links: NavLinkProps[] = [
 ];
 ---
 
-<nav class="w-screen z-max flex justify-between items-center">
-  <Image src={logo} alt="personal logo" class="w-8 h-8" />
+<nav
+  class="w-screen z-max flex justify-between items-center fixed top-0 left-0 h-20 px-5"
+>
+  <a href="/"><Image src={logo} alt="personal logo" class="w-44" /></a>
+
+  <ul class="gap-5 hidden sm:flex">
+    {links.map((l) => <Navlink title={l.title} href={l.href} />)}
+  </ul>
 </nav>

@@ -1,16 +1,26 @@
 ---
 import Image from "astro/components/Image.astro";
-import background from "#assets/images/background.png";
+import background from "#assets/images/hero-background.jpg";
+import logo from "#assets/icons/logo.svg";
 ---
 
 <section
-  class="brightness-75"
-  style={{
-    backgroundImage: `url(${background.src})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    height: "110vh",
-  }}
+  class="min-h-screen relative grid place-content-center text-white overflow-hidden px-5 sm:px-10"
 >
+  <div class="w-full h-full absolute top-0 left-0 brightness-75 -z-10">
+    <Image
+      src={background}
+      alt="Nairobi Skyline"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <div class="grid md:grid-cols-2 w-full lg:w-1/2 mx-auto gap-10">
+    <Image src={logo} alt="logo" class="w-full my-auto" />
+    <h1
+      class="uppercase text-5xl md:text-7xl xl:text-8xl border-r-8 md:border-r-0 md:border-l-8 text-right md:text-left px-7"
+    >
+      Your trusted legal partner in kenya
+    </h1>
+  </div>
 </section>

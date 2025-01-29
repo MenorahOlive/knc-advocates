@@ -7,5 +7,8 @@ export interface NavLinkProps {
 const { title, href } = Astro.props as NavLinkProps;
 ---
 
-<a href={href} class="font-worksans text-primary text-sm text-center">{title}</a
->
+<li>
+  <a href={href} class="font-worksans text-primary text-center text-lg"
+    >{title}</a
+  >
+</li>
