@@ -14,12 +14,12 @@ const links: NavLinkProps[] = [
 ---
 
 <nav
-  class="w-screen z-50 flex justify-between items-center fixed top-0 left-0 h-20 px-5 shadow-sm"
+  class="w-screen z-50 flex gap-96 justify-items-start items-center fixed top-0 left-0 h-20 px-5 shadow-sm"
 >
   <a href="/"><Image src={logo} alt="Company logo" class="w-44" /></a>
 
   {/* Desktop Navigation */}
-  <ul class="gap-5 hidden sm:flex">
+  <ul class="gap-7 hidden sm:flex">
     {links.map((l) => <Navlink title={l.title} href={l.href} />)}
   </ul>
 
@@ -74,7 +74,7 @@ const links: NavLinkProps[] = [
           <li>
             <a
               href={l.href}
-              class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+              class="block px-4 py-2 font-worksans text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
             >
               {l.title}
             </a>
