@@ -124,6 +124,19 @@ const links: NavLinkProps[] = [
   document.querySelectorAll("#mobile-menu a").forEach((link) => {
     link.addEventListener("click", toggleMenu);
   });
+
+  // Scroll effect for navbar with fade animation
+  const nav = document.querySelector("nav");
+  function handleScroll() {
+    if (window.scrollY > 0) {
+      nav.classList.add("scrolled");
+    } else {
+      nav.classList.remove("scrolled");
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll(); // Initialize on load
 </script>
 
 <style>
@@ -134,5 +147,19 @@ const links: NavLinkProps[] = [
 
   #backdrop {
     transition: opacity 0.3s ease-in-out;
+  }
+
+  nav::before {
+    content: "";
+    @apply absolute inset-0 bg-secondary opacity-0 transition-opacity duration-300;
+    z-index: -1;
+  }
+
+  nav.scrolled {
+    @apply shadow-sm;
+  }
+
+  nav.scrolled::before {
+    @apply opacity-100;
   }
 </style>
