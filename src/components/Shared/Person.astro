@@ -1,0 +1,19 @@
+---
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  name: string;
+  image: ImageMetadata;
+}
+const { name, image } = Astro.props;
+---
+
+<li class="h-[60vh] min-h-[500px] relative overflow-hidden group">
+  <Image src={image} alt={name} class="w-full h-full object-cover" />
+
+  <h4
+    class="w-full absolute bottom-0 bg-secondary text-primary text-center text-xl uppercase font-lemonmilk py-5 transform translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"
+  >
+    {name}
+  </h4>
+</li>

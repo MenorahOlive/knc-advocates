@@ -1,0 +1,34 @@
+---
+import placeholderPerson from "#assets/images/placeholder-person.png";
+import Person from "#components/Shared/Person.astro";
+const people = [
+  {
+    name: "Joyce Nderu",
+    image: placeholderPerson,
+  },
+  {
+    name: "Joyce Nderu",
+    image: placeholderPerson,
+  },
+];
+---
+
+<section
+  class="grid lg:grid-cols-3 gap-16 py-16 px-5 lg:px-20 max-w-[1500px] mx-auto"
+>
+  <div class="flex flex-col justify-between">
+    <h2
+      class="text-center lg:text-left text-3xl md:text-5xl font-bold uppercase mb-12 md:mb-20 font-lemonmilk"
+    >
+      People
+    </h2>
+
+    <p class="text-3xl xl:text-4xl 2xl:text-5xl text-center lg:text-left">
+      Our team comprises seasoned advocates with a proven track record in
+      diverse areas of law.
+    </p>
+  </div>
+  <ul class="col-span-2 grid sm:grid-cols-2 gap-10 content-center">
+    {people.map((person) => <Person name={person.name} image={person.image} />)}
+  </ul>
+</section>
