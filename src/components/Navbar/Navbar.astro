@@ -1,0 +1,19 @@
+---
+import type { NavLinkProps } from "./Navlinks.astro";
+import Navlinks from "./Navlinks.astro";
+import Image from "astro/components/Image.astro";
+import chevron from "#assets/icons/chevron.png";
+import logo from "#assets/images/logo.png";
+
+const links: NavLinkProps[] = [
+  { title: "About", href: "/about" },
+  { title: "Services", href: "/services" },
+  { title: "People", href: "/people" },
+  { title: "Insights", href: "/insights" },
+  { title: "Contacts", href: "/contacts" },
+];
+---
+
+<nav class="w-screen z-max flex justify-between items-center">
+  <Image src={logo} alt="personal logo" class="w-8 h-8" />
+</nav>

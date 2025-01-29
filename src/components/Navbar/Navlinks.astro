@@ -1,0 +1,11 @@
+---
+export interface NavLinkProps {
+  title: string;
+  href: string;
+}
+
+const { title, href } = Astro.props as NavLinkProps;
+---
+
+<a href={href} class="font-worksans text-primary text-sm text-center">{title}</a
+>
