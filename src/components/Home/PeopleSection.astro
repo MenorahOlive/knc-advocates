@@ -14,7 +14,7 @@ const people = [
 ---
 
 <section
-  class="grid lg:grid-cols-3 gap-16 py-16 px-5 lg:px-0 max-w-[1500px] mx-auto"
+  class="grid lg:grid-cols-3 gap-16 py-16 px-5 lg:px-10 max-w-[1500px] mx-auto"
 >
   <div class="flex flex-col justify-between">
     <h2
@@ -27,6 +27,8 @@ const people = [
       Our team comprises seasoned advocates with a proven track record in
       diverse areas of law.
     </p>
+
+    <div></div>
   </div>
   <ul class="col-span-2 grid sm:grid-cols-2 gap-10 content-center">
     {people.map((person) => <Person name={person.name} image={person.image} />)}
