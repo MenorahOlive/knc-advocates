@@ -1,0 +1,36 @@
+---
+import Insight from "../Shared/Insight.astro";
+const inisghts = [
+  {
+    title: "Demystifying Intellectual Property: Protect Your Ideas",
+    href: "/insights/demystifying-intellectual-property",
+  },
+  {
+    title: "Litigation vs. Arbitration: Which Path is Right for You?",
+    href: "/insights/litigation-vs-arbitration",
+  },
+  {
+    title: "Navigating Corporate Compliance: Tips for Business Owners",
+    href: "/insights/navigating-corporate-compliance",
+  },
+];
+---
+
+<section class="bg-secondary px-5 sm:px-10">
+  <section
+    class="max-w-[1500px] mx-auto grid lg:grid-cols-2 py-16 gap-16 text-primary place-content-center"
+  >
+    <h3
+      class="text-6xl xl:text-7xl font-lemonmik uppercase text-center lg:text-left leading-relaxed flex items-center"
+    >
+      Dive into our latest insights
+    </h3>
+    <ul class="flex flex-col">
+      {
+        inisghts.map((insight) => (
+          <Insight title={insight.title} href={insight.href} />
+        ))
+      }
+    </ul>
+  </section>
+</section>

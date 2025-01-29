@@ -1,0 +1,23 @@
+---
+import ArrowAngled from "#assets/icons/arrow-angled.svg";
+import Image from "astro/components/Image.astro";
+interface Props {
+  title: string;
+  href: string;
+}
+const { title, href } = Astro.props;
+---
+
+<li class="border-t-2 last:border-b-2">
+  <a
+    href={href}
+    class="justify-between items-center py-10 border-primary text-xl flex w-full h-full group"
+  >
+    {title}
+    <Image
+      src={ArrowAngled}
+      alt="arrow"
+      class="w-6 h-6 transform rotate-0 group-hover:rotate-45 transition-transform duration-300"
+    />
+  </a>
+</li>
