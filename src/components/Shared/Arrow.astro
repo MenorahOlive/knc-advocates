@@ -1,0 +1,28 @@
+---
+interface Props {
+  strokeColor?: string;
+}
+const { strokeColor } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 0 200 20">
+  <!-- Long tail -->
+  <path
+    d="M50,10 L250,10"
+    stroke={strokeColor || "white"}
+    stroke-width="2"
+    stroke-linecap="round"></path>
+
+  <!-- Arrowhead lines -->
+  <path
+    d="M230,0 L250,10"
+    stroke={strokeColor || "white"}
+    stroke-width="2"
+    stroke-linecap="round"></path>
+
+  <path
+    d="M230,20 L250,10"
+    stroke={strokeColor || "white"}
+    stroke-width="2"
+    stroke-linecap="round"></path>
+</svg>

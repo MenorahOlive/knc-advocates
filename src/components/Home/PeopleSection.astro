@@ -1,5 +1,6 @@
 ---
 import placeholderPerson from "#assets/images/placeholder-person.png";
+import Arrow from "#components/Shared/Arrow.astro";
 import Person from "#components/Shared/Person.astro";
 const people = [
   {
@@ -16,7 +17,7 @@ const people = [
 <section
   class="grid lg:grid-cols-3 gap-16 py-16 px-5 lg:px-10 max-w-[1500px] mx-auto"
 >
-  <div class="flex flex-col justify-between">
+  <div class="flex flex-col gap-20">
     <div>
       <h2
         class="text-center lg:text-left text-3xl md:text-5xl font-bold uppercase mb-12 md:mb-20 font-lemonmilk"
@@ -28,6 +29,10 @@ const people = [
         Our team comprises seasoned advocates with a proven track record in
         diverse areas of law.
       </p>
+    </div>
+
+    <div class="w-2/3">
+      <Arrow strokeColor="#1E1E1E" />
     </div>
   </div>
   <ul class="col-span-2 grid sm:grid-cols-2 gap-10 content-center">
