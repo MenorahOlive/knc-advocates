@@ -16,8 +16,6 @@ const links: NavLinkProps[] = [
 <nav
   class="w-screen z-50 flex gap-10 items-center justify-between sm:justify-start fixed top-0 left-0 h-20 px-5"
 >
-  <a href="/"><Image src={logo} alt="Company logo" class="w-44" /></a>
-
   {/* Desktop Navigation */}
   <ul class="gap-7 hidden sm:flex mx-auto transform sm:-translate-x-20">
     {links.map((l) => <Navlink title={l.title} href={l.href} />)}
