@@ -3,6 +3,7 @@ import { links } from "#components/Navbar/Navbar.astro";
 import Navlink from "#components/Navbar/Navlink.astro";
 import logo from "#assets/icons/logo.svg";
 import Image from "astro/components/Image.astro";
+import linkedin from "#assets/icons/linked-in.png";
 ---
 
 <footer class="bg-secondary text-primary py-16">
@@ -15,18 +16,22 @@ import Image from "astro/components/Image.astro";
       <p>Nairobi, Kenya</p>
       <a href="tel:++254726415263">+254-726-415263</a>
     </div>
-
-    <nav>
-      <ul class="flex flex-col gap-4 mr-0 sm:mr-20">
-        {
-          links.map((l) => (
-            <li>
-              <Navlink title={l.title} href={l.href} />
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <div
+      class="flex flex-col-reverse items-center md:flex-row md:items-end gap-10"
+    >
+      <nav>
+        <ul class="flex flex-col gap-4 mr-0">
+          {
+            links.map((l) => (
+              <li>
+                <Navlink title={l.title} href={l.href} />
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <a href=""><Image src={linkedin} alt="linkedlogo" class="w-6" /></a>
+    </div>
   </section>
 
   <section
