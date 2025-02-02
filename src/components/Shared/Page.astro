@@ -1,0 +1,35 @@
+---
+import Layout from "src/layouts/Layout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  subtitle: string;
+}
+
+const { title, subtitle, description } = Astro.props;
+---
+
+<Layout title={title} description={description} type="website" image="">
+  <main class="min-h-[50vh] pt-24 max-w-[1500px] mx-auto">
+    <div class="flex flex-col items-center gap-10">
+      <h1
+        class="text-center uppercase lg:text-left font-lemonmilk text-3xl md:text-5xl"
+      >
+        {title}
+        <div aria-hidden="true" class="h-2 w-[70%] mx-auto bg-tertiary mt-10">
+        </div>
+      </h1>
+
+      <h2 class="text-2xl text-center">
+        {subtitle}
+        <div aria-hidden="true" class="h-1 w-[40%] mx-auto bg-secondary mt-10">
+        </div>
+      </h2>
+    </div>
+
+    <p class="text-xl font-light my-16">{description}</p>
+
+    <slot />
+  </main>
+</Layout>
