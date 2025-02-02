@@ -9,7 +9,9 @@ import Image from "astro/components/Image.astro";
   <section
     class="flex flex-col sm:flex-row gap-10 sm:justify-between max-w-[1500px] mx-auto px-5 sm:px-10 items-center sm:items-start text-center"
   >
-    <div class="text-xl font-neuelight flex flex-col gap-4">
+    <div
+      class="text-md xl:text-lg 2xl:text-xl font-neuelight flex flex-col gap-4"
+    >
       <p>Nairobi, Kenya</p>
       <a href="tel:++254726415263">+254-726-415263</a>
     </div>
@@ -32,7 +34,9 @@ import Image from "astro/components/Image.astro";
   >
     <Image src={logo} alt="Company logo" class="w-44 hidden sm:block" />
 
-    <p class="mx-auto font-neuelight transform sm:-translate-x-20">
+    <p
+      class="mx-auto text-xs xl:text-sm 2xl:text-md font-neuelight transform sm:-translate-x-20"
+    >
       Copyright © <span id="current-year">0</span> Kinyanjui Njeru & Co Advocates
     </p>
   </section>
