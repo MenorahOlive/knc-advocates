@@ -5,6 +5,7 @@ import logo from "#assets/icons/logo.svg";
 import Navlink, { type NavLinkProps } from "./Navlink.astro";
 
 export const links: NavLinkProps[] = [
+  { title: "Home", href: "/" },
   { title: "About", href: "/about" },
   { title: "Services", href: "/services" },
   { title: "People", href: "/people" },
@@ -22,6 +23,9 @@ const { isTransparent } = Astro.props;
 <nav
   class={`w-screen z-50 flex gap-10 items-center justify-between sm:justify-center fixed top-0 left-0 h-20 px-5 ${isTransparent ? "bg-transparent" : "bg-secondary"}`}
 >
+  <a href="/"
+    ><Image src={logo} alt="Company logo" class="w-44 block sm:hidden" /></a
+  >
   {/* Desktop Navigation */}
   <ul class="gap-7 hidden sm:flex">
     {links.map((l) => <Navlink title={l.title} href={l.href} />)}
@@ -78,7 +82,7 @@ const { isTransparent } = Astro.props;
           <li>
             <a
               href={l.href}
-              class="block px-4 py-2 font-worksans text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+              class="block px-4 py-2  text-gray-700 hover:bg-gray-100 rounded-lg  font-neuelight transition-colors duration-200"
             >
               {l.title}
             </a>

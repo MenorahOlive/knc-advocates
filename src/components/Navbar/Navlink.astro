@@ -8,5 +8,9 @@ const { title, href } = Astro.props as NavLinkProps;
 ---
 
 <li>
-  <a href={href} class="text-primary text-center text-xl">{title}</a>
+  <a
+    href={href}
+    class="text-primary font-neue font-neuelight text-center text-md xl:text-lg 2xl:text-xl"
+    >{title}</a
+  >
 </li>
