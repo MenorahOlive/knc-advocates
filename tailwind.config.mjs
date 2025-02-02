@@ -20,6 +20,10 @@ export default {
       fontFamily: {
         worksans: ["worksans", "sans-serif"],
         lemonmilk: ["lemonmilk", "sans-serif"],
+        neueblack: ["neueblack", "sans-serif"],
+        neuelight: ["neuelight", "sans-serif"],
+        neueroman: ["neueroman", "sans-serif"],
+        neuethin: ["neuethin", "sans-serif"],
       },
     },
   },
