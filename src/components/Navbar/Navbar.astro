@@ -11,10 +11,16 @@ export const links: NavLinkProps[] = [
   { title: "Insights", href: "/insights" },
   { title: "Contacts", href: "/contacts" },
 ];
+
+interface Props {
+  isTransparent?: boolean;
+}
+
+const { isTransparent } = Astro.props;
 ---
 
 <nav
-  class="w-screen z-50 flex gap-10 items-center justify-between sm:justify-center fixed top-0 left-0 h-20 px-5"
+  class={`w-screen z-50 flex gap-10 items-center justify-between sm:justify-center fixed top-0 left-0 h-20 px-5 ${isTransparent ? "bg-transparent" : "bg-secondary"}`}
 >
   {/* Desktop Navigation */}
   <ul class="gap-7 hidden sm:flex">

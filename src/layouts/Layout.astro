@@ -8,9 +8,10 @@ interface Props {
   description: string;
   type: "website" | "article" | "profile";
   image: string;
+  navIsTransparent?: boolean;
 }
 
-const { title, description, type, image } = Astro.props;
+const { title, description, type, image, navIsTransparent } = Astro.props;
 ---
 
 <!doctype html>
@@ -34,7 +35,7 @@ const { title, description, type, image } = Astro.props;
       }}
     />
   </head>
-  <Navbar />
+  <Navbar isTransparent={navIsTransparent} />
   <body>
     <slot />
   </body>
