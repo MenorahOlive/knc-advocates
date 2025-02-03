@@ -1,0 +1,30 @@
+---
+import Image from "astro/components/Image.astro";
+import LinkedinIcon from "#assets/icons/linkedin-yellow.svg";
+import MailIcon from "#assets/icons/mail-yellow.svg";
+import PhoneIcon from "#assets/icons/phone-yellow.svg";
+
+interface Props {
+  name: string;
+  image: ImageMetadata;
+}
+const { name, image } = Astro.props;
+---
+
+<li class="h-[500px] relative overflow-hidden group">
+  <Image src={image} alt={name} class="w-full h-full object-cover" />
+
+  <h4
+    class="w-full absolute bottom-0 bg-secondary text-primary text-center text-xl uppercase font-lemonmilk py-5 transform translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"
+  >
+    {name}
+    <div
+      class="flex pt-5 flex-row gap-5 content-center items-center justify-center"
+    >
+      <a href=""><Image src={LinkedinIcon} alt="linkedin icon" class="w-6" /></a
+      >
+      <a href=""><Image src={MailIcon} alt="mail icon" class="w-6" /></a>
+      <a href=""><Image src={PhoneIcon} alt="phone icon" class="w-6" /></a>
+    </div>
+  </h4>
+</li>
