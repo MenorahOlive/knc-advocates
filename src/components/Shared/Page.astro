@@ -11,7 +11,7 @@ const { title, subtitle, description } = Astro.props;
 ---
 
 <Layout title={title} description={description} type="website" image="">
-  <main class="min-h-[50vh] pt-32 max-w-[1500px] mx-auto">
+  <main class="min-h-[50vh] pt-32 max-w-[1500px] mx-auto px-10">
     <div class="flex flex-col items-center gap-10">
       <h1
         class="text-center uppercase lg:text-left font-lemonmilk text-3xl md:text-5xl"
@@ -21,14 +21,14 @@ const { title, subtitle, description } = Astro.props;
         </div>
       </h1>
 
-      <h2 class="text-2xl text-center">
+      <h2 class="text-2xl font-neueroman text-center">
         {subtitle}
         <div aria-hidden="true" class="h-1 w-[40%] mx-auto bg-secondary mt-10">
         </div>
       </h2>
     </div>
 
-    <p class="text-xl font-light my-16">{description}</p>
+    <p class="text-xl font-neuelight my-16">{description}</p>
 
     <slot />
   </main>
