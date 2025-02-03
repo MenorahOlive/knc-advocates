@@ -3,6 +3,8 @@ import placeholderPerson1 from "#assets/images/woman-placeholder-1.png";
 import placeholderPerson2 from "#assets/images/woman-placeholder-2.png";
 import Arrow from "#components/Shared/Arrow.astro";
 import Person from "#components/Shared/Person.astro";
+import Image from "astro/components/Image.astro";
+import ArrowStraight from "#assets/icons/arrow-straight.svg";
 const people = [
   {
     name: "Joyce Nderu",
@@ -18,19 +20,27 @@ const people = [
 <section
   class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-20 px-5 lg:px-10 max-w-[1500px] mx-auto"
 >
-  <div class="">
+  <div class="flex flex-col gap-10">
     <h2
-      class="text-center lg:text-left text-3xl md:text-5xl font-bold uppercase mb-12 md:mb-20 font-lemonmilk"
+      class="text-center lg:text-left text-3xl md:text-5xl font-bold uppercase font-lemonmilk"
     >
       People
     </h2>
 
     <p
-      class="text-lg xl:text-xl 2xl:text-2xl text-center lg:text-left font-neuelight"
+      class="text-lg xl:text-xl 2xl:text-2xl text-center lg:text-left font-neuelight mb-8"
     >
       Our team comprises seasoned advocates with a proven track record in
       diverse areas of law.
     </p>
+    <a
+      href="/people"
+      class="w-full bg-secondary font-neuelight flex flex-row-reverse gap-3 justify-between text-primary px-6 py-5"
+    >
+      <Image src={ArrowStraight} alt="Arrow icon" />
+
+      Meet Our People</a
+    >
   </div>
   <ul class="col-span-2 grid sm:grid-cols-2 gap-10 content-center">
     {people.map((person) => <Person name={person.name} image={person.image} />)}
