@@ -1,0 +1,50 @@
+---
+import Image from "astro/components/Image.astro";
+import ArrowAngled from "#assets/icons/arrow-angled.svg";
+
+export interface InsightProps {
+  title: string;
+  slug: string;
+  brief: string;
+  image: {
+    src: any;
+    alt: string;
+  };
+}
+
+const { title, slug, image, brief } = Astro.props as InsightProps;
+
+const imgSize = {
+  width: 800,
+  height: 450,
+};
+---
+
+<a href={`/insights/${slug}`}>
+  <div
+    class="group relative flex flex-col gap-6 overflow-hidden text-primary bg-secondary"
+  >
+    <div
+      class="absolute right-3 top-3 grid h-12 w-12 -translate-y-32 place-content-center rounded-full bg-secondary transition-transform duration-300 hover:scale-110 group-hover:translate-y-0"
+      style={{
+        zIndex: 50,
+      }}
+    >
+      <Image src={ArrowAngled} alt="Arrow angled" />
+    </div>
+    <div class="overflow-hidden">
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={imgSize.width}
+        height={imgSize.height}
+        class={`object-cover aspect-video object-center  group-hover:scale-110 transition-transform duration-1000`}
+      />
+    </div>
+    <h4 class="text-2xl px-5 font-medium font-neuelight">{title}</h4>
+
+    <p class="break text-md px-5 py-5 hyphens-auto text-pretty font-neuelight">
+      {brief}
+    </p>
+  </div>
+</a>

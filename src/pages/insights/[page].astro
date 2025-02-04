@@ -1,0 +1,82 @@
+---
+import SectionHeader from "#components/Shared/SectionHeader.astro";
+import Insight1 from "#assets/images/insight-1.png";
+import Insight2 from "#assets/images/insight-2.png";
+import Insight3 from "#assets/images/insight-3.png";
+import InsightCard, {
+  type InsightProps,
+} from "#components/Shared/InsightCard.astro";
+import Pagination from "#components/Shared/Pagination.astro";
+
+export const insights: InsightProps[] = [
+  {
+    title: "Demystifying Intellectual Property: Protect Your Ideas",
+    brief:
+      "Learn the essentials of patents, trademarks, copyrights, and trade secrets to safeguard your innovations and business assets. Protect what’s yours!",
+    slug: "demystifying-intellectual-property",
+    image: {
+      src: Insight1,
+      alt: "Legal Trends",
+    },
+  },
+  {
+    title: "Litigation vs. Arbitration: Which Path is Right for You?",
+    brief:
+      "Learn the essentials of patents, trademarks, copyrights, and trade secrets to safeguard your innovations and business assets. Protect what’s yours!",
+    slug: "litigation-vs-arbitration",
+    image: {
+      src: Insight2,
+      alt: "Legal Trends",
+    },
+  },
+  {
+    title: "Navigating Corporate Compliance: Tips for Business Owners",
+    brief:
+      "Learn the essentials of patents, trademarks, copyrights, and trade secrets to safeguard your innovations and business assets. Protect what’s yours!",
+    slug: "navigating-corporate-compliance",
+    image: {
+      src: Insight3,
+      alt: "Legal Trends",
+    },
+  },
+];
+
+export function getStaticPaths({ paginate }) {
+  return paginate(insights, { pageSize: 12 });
+}
+const { page } = Astro.props as any;
+---
+
+<SectionHeader
+  title="Insights"
+  description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
+  subtitle="Exceptional law requires exceptional insights."
+>
+  <section class="mt-10 min-h-screen">
+    <div
+      class="mx-auto grid max-w-screen-2xl grid-cols-[repeat(auto-fill,24rem)] justify-center gap-10 py-10"
+    >
+      {
+        page.data.map((i) => (
+          <InsightCard
+            title={i.title}
+            brief={i.brief}
+            slug={i.slug}
+            image={{
+              src: i.image?.src,
+              alt: i.image?.alt,
+            }}
+          />
+        ))
+      }
+    </div>
+
+    <Pagination
+      totalPages={page.totalPages}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      pagesToShow={page.lastPage > 3 ? 3 : page.lastPage}
+      baseUrl="/insights"
+    />
+  </section>
+</SectionHeader>

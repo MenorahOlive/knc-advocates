@@ -2,10 +2,16 @@
 import Layout from "src/layouts/Layout.astro";
 import ContactForm from "#components/Shared/ContactForm.astro";
 import Navbar from "#components/Navbar/Navbar.astro";
+import InsightSection from "#components/Home/InsightSection.astro";
+import PeopleSection from "#components/Home/PeopleSection.astro";
 ---
 
 <Layout title="contacts" description="contacts" type="website" image="">
   <main class="pt-20">
     <ContactForm />
+
+    <InsightSection />
+
+    <PeopleSection />
   </main>
 </Layout>
