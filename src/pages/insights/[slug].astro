@@ -1,0 +1,87 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { contentfulClient } from "#lib/contentfulClient.ts";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import formatDate from "#lib/dateMethods";
+import { Image } from "astro:assets";
+import imageOptimizer from "#lib/imageOptimizer";
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries({
+    content_type: "insight",
+  });
+
+  let options = {
+    renderNode: {
+      "embedded-asset-block": (node: any) =>
+        `<img  src="${node.data.target.fields.file.url}"/>`,
+    },
+  };
+
+  const pages = entries.items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      content: documentToHtmlString(item.fields.content as any, options),
+      brief: item.fields.brief,
+      dateCreated: formatDate(item.sys.createdAt as string),
+      author: item.fields.author,
+      image: (item.fields.headlineImage as any).fields.file.url,
+      imageAlt: (item.fields.headlineImage as any).fields.title,
+      slug: item.fields.slug,
+    },
+  }));
+  return pages;
+}
+
+const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
+  Astro.props as any;
+---
+
+<Layout title={title} description={brief} type="article" image="">
+  <div
+    class="mx-auto mt-32 flex min-h-screen max-w-screen-lg flex-col gap-6 pb-16 text-primary"
+  >
+    <nav aria-label="breadcrumb" class="flex gap-3 font-medium">
+      <a href="/insights/1">Insights</a>
+      /
+      <span>{title}</span>
+    </nav>
+
+    <h1 class="text-5xl font-medium">{title}</h1>
+
+    <p class="">{brief}</p>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <Image
+          src={imageOptimizer(author.fields.image.fields.file.url, 100, 100)}
+          alt={author.fields.name}
+          width={48}
+          height={48}
+          class="h-12 w-12 object-cover"
+        />
+        <div>
+          <h3 class="text-lg font-medium">{author.fields.name}</h3>
+          <h4 class="text-sm">{author.fields.position}</h4>
+        </div>
+      </div>
+      <p
+        class="h-fit w-fit rounded-lg bg-primary px-4 py-1 font-medium text-secondary"
+      >
+        {dateCreated}
+      </p>
+    </div>
+    <Image
+      src={image}
+      alt={imageAlt}
+      width={1920}
+      height={1080}
+      class="aspect-video w-full rounded-lg object-cover object-center"
+    />
+
+    <article
+      set:html={content}
+      class="prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-primary border-b border-primary pb-10 text-justify text-gray-700"
+    />
+  </div>
+</Layout>

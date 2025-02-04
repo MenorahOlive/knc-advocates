@@ -12,7 +12,7 @@ const { name, image } = Astro.props;
   <Image src={image} alt={name} class="w-full h-full object-cover" />
 
   <h4
-    class="w-full absolute bottom-0 bg-secondary text-primary text-center text-xl uppercase font-lemonmilk py-5 transform translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"
+    class="w-full absolute bottom-0 backdrop-blur-lg bg-secondary/30 text-primary text-center text-xl uppercase font-lemonmilk py-5 transform translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"
   >
     {name}
   </h4>
