@@ -1,11 +1,13 @@
 ---
 import Arrow from "./Arrow.astro";
 
-const { title } = Astro.props;
+const { title, href } = Astro.props;
 ---
 
-<li
-  class="font-lemonmilk bg-secondary text-primary aspect-square grid place-content-center p-10 text-2xl 2xl:text-4xl text-center"
+<a href={href}
+  ><li
+    class="font-lemonmilk bg-secondary text-primary aspect-square grid place-content-center p-10 text-2xl 2xl:text-4xl text-center"
+  >
+    {title}
+  </li></a
 >
-  {title}
-</li>

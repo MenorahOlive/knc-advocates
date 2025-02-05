@@ -3,9 +3,9 @@
 import Service from "../Shared/Service.astro";
 
 const services = [
-  { title: "Competition & Consumer" },
-  { title: "Corporate & Finance" },
-  { title: "Corporate Governance" },
+  { title: "Competition & Consumer", href: "competition-and-consumer" },
+  { title: "Corporate & Finance", href: "corporate-and-finance" },
+  { title: "Corporate Governance", href: "corporate-governance" },
 ];
 ---
 
@@ -17,6 +17,10 @@ const services = [
   </h2>
 
   <ul class="grid lg:grid-cols-3 gap-16">
-    {services.map((service) => <Service title={service.title} />)}
+    {
+      services.map((service) => (
+        <Service title={service.title} href={service.href} />
+      ))
+    }
   </ul>
 </section>

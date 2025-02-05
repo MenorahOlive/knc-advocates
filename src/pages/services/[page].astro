@@ -3,18 +3,36 @@ import SectionHeader from "#components/Shared/SectionHeader.astro";
 import Service from "#components/Shared/Service.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
 import PeopleSection from "#components/Home/PeopleSection.astro";
+import contentfulClient from "#lib/contentfulClient.ts";
 
 const services = [
-  { title: "Competition & Consumer" },
-  { title: "Corporate & Finance" },
-  { title: "Corporate Governance" },
-  { title: "Data Protection" },
-  { title: "Employment" },
-  { title: "Procurement & Outsourcing" },
-  { title: "Disputes" },
-  { title: "Telcoms, Media & Technology" },
-  { title: "Commercial" },
+  { title: "Competition & Consumer", href: "competition-and-consumer" },
+  { title: "Corporate & Finance", href: "corporate-and-finance" },
+  { title: "Corporate Governance", href: "corporate-governance" },
+  { title: "Data Protection", href: "data-protection" },
+  { title: "Employment", href: "employment" },
+  { title: "Procurement & Outsourcing", href: "procurement-and-outsourcing" },
+  { title: "Disputes", href: "disputes" },
+  {
+    title: "Telcoms, Media & Technology",
+    href: "telcoms-media-and-technology",
+  },
+  { title: "Commercial", href: "commercial" },
 ];
+
+export async function getStaticPaths({ paginate }: any) {
+  const entries = await contentfulClient.getEntries({
+    content_type: "insight",
+  });
+
+  const insights = entries.items as any;
+
+  return paginate(insights, {
+    pageSize: 12,
+  });
+}
+
+const { page } = Astro.props as any;
 ---
 
 <SectionHeader
@@ -24,7 +42,11 @@ const services = [
 >
   <section class="container mx-auto px-4 py-10">
     <ul class="grid lg:grid-cols-3 gap-16">
-      {services.map((service) => <Service title={service.title} />)}
+      {
+        services.map((service) => (
+          <Service title={service.title} href={service.href} />
+        ))
+      }
     </ul>
   </section>
 

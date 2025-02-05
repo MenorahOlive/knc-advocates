@@ -1,0 +1,56 @@
+---
+import SectionHeader from "C:/Users/olive/Development/knc-advocates/src/components/Shared/SectionHeader.astro";
+import Accordion from "#components/Shared/Accordion.astro";
+import contentfulClient from "#lib/contentfulClient.ts";
+
+const mainHeading = "What commercial legal services we offer";
+
+const items = [
+  {
+    title: "Procurement and Outsourcing",
+    description:
+      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
+  },
+  {
+    title: "Franchising and Distribution Arrangements",
+    description:
+      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
+  },
+];
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries({
+    content_type: "insight",
+  });
+
+  let options = {
+    renderNode: {
+      "embedded-asset-block": (node: any) =>
+        `<img  src="${node.data.target.fields.file.url}"/>`,
+    },
+  };
+
+  const pages = entries.items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+
+      brief: item.fields.brief,
+
+      slug: item.fields.slug,
+    },
+  }));
+  return pages;
+}
+
+const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
+  Astro.props as any;
+---
+
+<SectionHeader
+  title="Commercial Law"
+  description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
+  subtitle="Strategic Commercial Legal Support for Businesses of All Sizes"
+>
+  <Accordion items={items} mainHeading={mainHeading} />
+</SectionHeader>
