@@ -1,0 +1,85 @@
+---
+import Image from "astro/components/Image.astro";
+import plus from "#assets/icons/plus.svg";
+
+const { mainHeading, items } = Astro.props;
+---
+
+<div>
+  <h2
+    class="font-neueroman text-3xl text-secondary max-w-[1500px] text-center mx-auto py-10"
+  >
+    {mainHeading}
+  </h2>
+  <ul>
+    {
+      items.map((item, index) => (
+        <li class="border-t border-secondary/40 text-secondary py-3 flex flex-col gap-5 last:border-b last:border-secondary/40">
+          <h4 class="font-neueroman flex flex-row justify-between text-2xl py-3">
+            {item.title}
+            <Image
+              src={plus}
+              alt="plus icon"
+              class="accordion-icon cursor-pointer"
+              data-index={index}
+            />
+          </h4>
+          <p
+            class="font-neuelight text-lg p-2 hidden accordion-content"
+            data-index={index}
+          >
+            {item.description}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  // Wait for the DOM to load
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get all accordion icons
+    const icons = document.querySelectorAll(".accordion-icon");
+
+    // Add a click event listener to each icon
+    icons.forEach((icon) => {
+      icon.addEventListener("click", (event) => {
+        // Prevent the event from bubbling up
+        event.stopPropagation();
+
+        // Get the data-index attribute to identify the clicked icon
+        const index = icon.getAttribute("data-index");
+
+        // Find the corresponding description using the data-index
+        const content = document.querySelector(
+          `.accordion-content[data-index="${index}"]`
+        );
+
+        // Toggle the visibility of the description
+        content.classList.toggle("hidden");
+
+        // Optionally, rotate the icon to indicate the state
+        icon.classList.toggle("rotate-45");
+      });
+    });
+  });
+</script>
+
+<style>
+  .hidden {
+    display: none;
+  }
+
+  .rotate-45 {
+    transform: rotate(45deg);
+  }
+
+  .accordion-icon {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+</style>
