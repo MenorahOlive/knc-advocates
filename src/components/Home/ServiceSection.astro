@@ -1,26 +1,64 @@
 ---
 // src/sections/Services.astro
 import Service from "../Shared/Service.astro";
-
 const services = [
   { title: "Competition & Consumer", href: "competition-and-consumer" },
   { title: "Corporate & Finance", href: "corporate-and-finance" },
   { title: "Corporate Governance", href: "corporate-governance" },
+  { title: "Data Protection", href: "data-protection" },
+  { title: "Employment", href: "employment" },
+  { title: "Procurement & Outsourcing", href: "procurement-and-outsourcing" },
+  { title: "Disputes", href: "disputes" },
+  {
+    title: "Telcoms, Media & Technology",
+    href: "telcoms-media-and-technology",
+  },
+  { title: "Commercial", href: "commercial" },
 ];
 ---
 
-<section class="container mx-auto px-4 py-20 md:py-24">
+<section class="container mx-auto px-4 py-20 md:py-24 overflow-hidden">
   <h2
     class="text-center text-3xl md:text-5xl font-bold uppercase mb-12 md:mb-20 font-lemonmilk"
   >
     Services
   </h2>
 
-  <ul class="grid lg:grid-cols-3 gap-16">
-    {
-      services.map((service) => (
-        <Service title={service.title} href={service.href} />
-      ))
-    }
-  </ul>
+  <!-- Carousel Container -->
+  <div class="w-full overflow-hidden">
+    <!-- Carousel Track -->
+    <ul class="flex animate-scroll space-x-5">
+      {
+        services.map((service) => (
+          <li class="flex-shrink-0 ">
+            <Service title={service.title} href={service.href} />
+          </li>
+        ))
+      }
+      <!-- Duplicate the services for seamless looping -->
+      {
+        services.map((service) => (
+          <li class="flex-shrink-0">
+            <Service title={service.title} href={service.href} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </section>
+
+<!-- Add custom animation with Tailwind -->
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 10s linear infinite;
+  }
+</style>
