@@ -1,9 +1,38 @@
 ---
 import SectionHeader from "#components/Shared/SectionHeader.astro";
+import Carousel from "#components/Shared/Carousel.astro";
+import PeopleSection from "#components/Home/PeopleSection.astro";
+import InsightSection from "#components/Home/InsightSection.astro";
+import ContactForm from "#components/Shared/ContactForm.astro";
+
+const mainHeading = "What Services we Offer";
+
+const items = [
+  {
+    title: "Commercial Law",
+    description:
+      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
+  },
+  {
+    title: "Corporate Law",
+    description:
+      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
+  },
+];
 ---
 
 <SectionHeader
   title="About"
   description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
   subtitle="Exceptional law requires exceptional qualitites."
-/>
+>
+  <Carousel items={items} mainHeading={mainHeading} />
+
+  <div
+    class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
+  >
+    <PeopleSection />
+    <InsightSection />
+    <ContactForm />
+  </div>
+</SectionHeader>

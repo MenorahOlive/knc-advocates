@@ -40,7 +40,7 @@ const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
 
 <Layout title={title} description={brief} type="article" image="">
   <div
-    class="mx-auto mt-32 flex min-h-screen max-w-screen-lg flex-col gap-6 pb-16 text-primary"
+    class="mx-auto mt-32 flex min-h-screen font-neuelight max-w-screen-lg flex-col gap-6 pb-16 text-secondary"
   >
     <nav aria-label="breadcrumb" class="flex gap-3 font-medium">
       <a href="/insights/1">Insights</a>
@@ -48,9 +48,9 @@ const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
       <span>{title}</span>
     </nav>
 
-    <h1 class="text-5xl font-medium">{title}</h1>
+    <h1 class="text-5xl font-neueroman">{title}</h1>
 
-    <p class="">{brief}</p>
+    <p class="text-xl">{brief}</p>
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
         <Image
@@ -61,12 +61,12 @@ const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
           class="h-12 w-12 object-cover"
         />
         <div>
-          <h3 class="text-lg font-medium">{author.fields.name}</h3>
-          <h4 class="text-sm">{author.fields.position}</h4>
+          <h3 class="text-lg">{author.fields.name}</h3>
+          <h4 class="text-md">{author.fields.position}</h4>
         </div>
       </div>
       <p
-        class="h-fit w-fit rounded-lg bg-primary px-4 py-1 font-medium text-secondary"
+        class="h-fit w-fit rounded-lg bg-secondary px-4 py-1 font-medium text-primary"
       >
         {dateCreated}
       </p>
@@ -81,7 +81,7 @@ const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
 
     <article
       set:html={content}
-      class="prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-primary border-b border-primary pb-10 text-justify text-gray-700"
+      class="prose-headings:font-bold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-p:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-tertiary border-b border-secondary pb-10 text-justify text-secondary"
     />
   </div>
 </Layout>
