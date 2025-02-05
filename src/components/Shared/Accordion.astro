@@ -15,14 +15,12 @@ const { mainHeading, items } = Astro.props;
     {
       items.map((item, index) => (
         <li class="border-t border-secondary/40 text-secondary py-3 flex flex-col gap-5 last:border-b last:border-secondary/40">
-          <h4 class="font-neueroman flex flex-row justify-between text-2xl py-3">
+          <h4
+            class="font-neueroman flex flex-row justify-between text-2xl py-3 cursor-pointer"
+            data-index={index}
+          >
             {item.title}
-            <Image
-              src={plus}
-              alt="plus icon"
-              class="accordion-icon cursor-pointer"
-              data-index={index}
-            />
+            <Image src={plus} alt="plus icon" class="accordion-icon" />
           </h4>
           <p
             class="font-neuelight text-lg p-2 hidden accordion-content"
@@ -39,17 +37,14 @@ const { mainHeading, items } = Astro.props;
 <script>
   // Wait for the DOM to load
   document.addEventListener("DOMContentLoaded", () => {
-    // Get all accordion icons
-    const icons = document.querySelectorAll(".accordion-icon");
+    // Get all accordion headers (h4 elements)
+    const headers = document.querySelectorAll("h4[data-index]");
 
-    // Add a click event listener to each icon
-    icons.forEach((icon) => {
-      icon.addEventListener("click", (event) => {
-        // Prevent the event from bubbling up
-        event.stopPropagation();
-
-        // Get the data-index attribute to identify the clicked icon
-        const index = icon.getAttribute("data-index");
+    // Add a click event listener to each header
+    headers.forEach((header) => {
+      header.addEventListener("click", () => {
+        // Get the data-index attribute to identify the clicked header
+        const index = header.getAttribute("data-index");
 
         // Find the corresponding description using the data-index
         const content = document.querySelector(
@@ -59,7 +54,8 @@ const { mainHeading, items } = Astro.props;
         // Toggle the visibility of the description
         content.classList.toggle("hidden");
 
-        // Optionally, rotate the icon to indicate the state
+        // Find the image inside the clicked header and rotate it
+        const icon = header.querySelector(".accordion-icon");
         icon.classList.toggle("rotate-45");
       });
     });
@@ -72,7 +68,7 @@ const { mainHeading, items } = Astro.props;
   }
 
   .rotate-45 {
-    transform: rotate(45deg);
+    transform: rotate(225deg);
   }
 
   .accordion-icon {

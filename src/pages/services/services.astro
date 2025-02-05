@@ -3,7 +3,6 @@ import SectionHeader from "#components/Shared/SectionHeader.astro";
 import Service from "#components/Shared/ServiceCard.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
 import PeopleSection from "#components/Home/PeopleSection.astro";
-import contentfulClient from "#lib/contentfulClient.ts";
 
 const services = [
   { title: "Competition & Consumer", href: "competition-and-consumer" },
@@ -19,20 +18,6 @@ const services = [
   },
   { title: "Commercial", href: "commercial" },
 ];
-
-export async function getStaticPaths({ paginate }: any) {
-  const entries = await contentfulClient.getEntries({
-    content_type: "insight",
-  });
-
-  const insights = entries.items as any;
-
-  return paginate(insights, {
-    pageSize: 12,
-  });
-}
-
-const { page } = Astro.props as any;
 ---
 
 <SectionHeader
@@ -40,8 +25,8 @@ const { page } = Astro.props as any;
   description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
   subtitle="Exceptional law requires exceptional services."
 >
-  <section class="container mx-auto px-4 py-10 max-w-[1500px]">
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+  <section class="container mx-auto px-4 py-10">
+    <ul class="grid lg:grid-cols-3 gap-16">
       {
         services.map((service) => (
           <Service title={service.title} href={service.href} />

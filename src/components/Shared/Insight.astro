@@ -8,16 +8,16 @@ interface Props {
 const { title, href } = Astro.props;
 ---
 
-<li class="border-t-2 last:border-b-2">
+<li class="border-t-2 last:border-b-2 hover:bg-primary/5">
   <a
     href={href}
-    class="justify-between items-center py-10 border-primary font-neuelight text-lg xl:text-xl 2xl:text-2xl flex w-full h-full group"
+    class="justify-between items-center py-10 px-2 border-primary font-neuelight text-lg xl:text-xl 2xl:text-2xl flex w-full h-full group"
   >
     {title}
     <Image
       src={ArrowAngled}
       alt="arrow"
-      class="w-6 h-6 transform rotate-0 group-hover:rotate-45 transition-transform duration-300"
+      class="w-6 h-6 transform rotate-0 group-hover:rotate-45 transition-transform duration-300 active:translate-x-1"
       aria-hidden="true"
     />
   </a>

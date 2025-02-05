@@ -1,6 +1,6 @@
 ---
-// src/sections/Services.astro
-import Service from "../Shared/Service.astro";
+import Service from "../Shared/ServiceCarousel.astro";
+
 const services = [
   { title: "Competition & Consumer", href: "competition-and-consumer" },
   { title: "Corporate & Finance", href: "corporate-and-finance" },
@@ -15,6 +15,8 @@ const services = [
   },
   { title: "Commercial", href: "commercial" },
 ];
+
+const duplicatedServices = [...services, ...services]; // Duplicate services for seamless effect
 ---
 
 <section class="container mx-auto px-4 py-20 md:py-24 overflow-hidden">
@@ -25,21 +27,13 @@ const services = [
   </h2>
 
   <!-- Carousel Container -->
-  <div class="w-full overflow-hidden">
+  <div class="relative min-w-[1500px] mx-auto overflow-hidden">
     <!-- Carousel Track -->
-    <ul class="flex animate-scroll space-x-5">
+    <ul class="flex min-w-full whitespace-warp animate-scroll">
       {
-        services.map((service) => (
-          <li class="flex-shrink-0 ">
-            <Service title={service.title} href={service.href} />
-          </li>
-        ))
-      }
-      <!-- Duplicate the services for seamless looping -->
-      {
-        services.map((service) => (
-          <li class="flex-shrink-0">
-            <Service title={service.title} href={service.href} />
+        duplicatedServices.map((service, index) => (
+          <li class="flex-shrink-0 px-4">
+            <Service key={index} title={service.title} href={service.href} />
           </li>
         ))
       }
@@ -47,18 +41,20 @@ const services = [
   </div>
 </section>
 
-<!-- Add custom animation with Tailwind -->
+<!-- Tailwind & Keyframes for Smooth Infinite Scrolling -->
 <style>
   @keyframes scroll {
-    0% {
+    from {
       transform: translateX(0);
     }
-    100% {
+    to {
       transform: translateX(-50%);
     }
   }
 
   .animate-scroll {
-    animation: scroll 10s linear infinite;
+    display: flex;
+    width: max-content;
+    animation: scroll 60s linear infinite;
   }
 </style>

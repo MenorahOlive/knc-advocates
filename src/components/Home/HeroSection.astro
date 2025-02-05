@@ -18,9 +18,14 @@ import scales from "#assets/icons/scales.svg";
     <div
       class="grid md:grid-cols-2 w-full lg:w-1/2 mx-auto gap-10 px-5 sm:px-10 pb-[35vh]"
     >
-      <Image src={logo} alt="logo" class="w-full my-auto" />
+      <!-- Logo -->
+      <div class="my-auto overflow-hidden">
+        <Image src={logo} alt="logo" class="w-full animate-slide-in-left" />
+      </div>
+
+      <!-- Text -->
       <h1
-        class="uppercase font-lemonmilk text-5xl md:text-7xl border-r-8 md:border-r-0 md:border-l-8 text-right md:text-left px-7"
+        class="uppercase font-lemonmilk text-5xl md:text-7xl border-r-8 md:border-r-0 md:border-l-8 text-right md:text-left px-7 animate-slide-in-right"
       >
         Your trusted legal partner in kenya
       </h1>
@@ -47,15 +52,43 @@ import scales from "#assets/icons/scales.svg";
 </section>
 
 <style>
+  /* Keyframes for sliding in from the center to the left */
+  @keyframes slide-in-left {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Keyframes for sliding in from the center to the right */
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Apply animations to the logo and text */
+  .animate-slide-in-left {
+    animation: slide-in-left 2s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 2s ease-out forwards;
+  }
+
+  /* Clip-path for the container */
   @media (min-width: 768px) {
     .clipped-container {
-      clip-path: polygon(
-        0 0,
-        /* Top left */ 100% 0,
-        /* Top right */ 100% 80%,
-        /* Right side 90% down */ 90% 100%,
-        /* Bottom 90% from left */ 0 100% /* Bottom left */
-      );
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 90% 100%, 0 100%);
     }
   }
 

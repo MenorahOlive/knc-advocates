@@ -9,14 +9,17 @@
     </h3>
     <p class="text-lg xl:text-xl 2xl:text-2xl font-neuelight">
       If you would like to contact us, please use the form below or email:
-      <a href="mailto:info@knc-advocates.com" class="underline"
+      <a
+        href="mailto:info@knc-advocates.com"
+        class="underline hover:scale-105 hover:text-secondary/70 focus:text-tertiary/70 active:text-tertiary"
         >info@knc-advocates.com</a
       >
     </p>
     <p class="text-lg xl:text-xl 2xl:text-2xl font-neuelight">
       By sending an enquiry you accept our <a
         href="/privacy-policy"
-        class="underline">Privacy Policy</a
+        class="underline hover:scale-105 hover:text-secondary/70 focus:text-tertiary/70 active:text-tertiary"
+        >Privacy Policy</a
       >.
     </p>
   </div>
@@ -51,8 +54,62 @@
       id="message"
       class="w-full border-2 border-secondary p-2"></textarea>
 
-    <button type="submit" class="w-full bg-secondary text-primary px-4 py-3">
+    <button
+      type="submit"
+      class="w-full hover:bg-secondary/90 bg-secondary text-primary px-4 py-3"
+    >
       Send Enquiry
     </button>
   </form>
 </section>
+<style>
+  input {
+    border: none; /* Remove all borders */
+    border-bottom: 1px solid #1e1e1e; /* Only add a bottom border */
+    padding: 8px;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+    background: transparent;
+  }
+
+  input:focus {
+    border-bottom: 1px solid #bdc5c4; /* Change bottom border color on focus */
+    outline: none;
+  }
+
+  input:hover {
+    border-bottom: 1px solid #a9adac; /* Change bottom border color on hover */
+  }
+
+  input:hover {
+    border-bottom: 1px solid #a9adac; /* Change bottom border color on hover */
+  }
+
+  input:focus:not(:placeholder-shown) {
+    border-bottom: 1px solid #f1c25d;
+  }
+
+  /* Full box border for textarea (message field) */
+  textarea {
+    border: 1px solid #1e1e1e; /* Full box border */
+    padding: 8px;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+    background: transparent;
+  }
+
+  textarea:focus {
+    border: 1px solid #a9adac; /* Change border color on focus */
+    outline: none;
+  }
+
+  textarea:hover {
+    border: 1px solid #a9adac; /* Change border color on hover */
+  }
+
+  textarea:focus:not(:placeholder-shown) {
+    border: 1px solid #f1c25d;
+  }
+</style>
