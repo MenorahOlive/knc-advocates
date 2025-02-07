@@ -14,7 +14,7 @@ const entries = await contentfulClient.getEntries({
 });
 
 // Sort the entries by the `order` field in the `fields` object
-entries.items.sort((a, b) => a.fields.order - b.fields.order);
+entries.items.sort((a: any, b: any) => a.fields.order - b.fields.order);
 
 // Map the sorted data to the required structure
 const services = entries.items.map((item) => ({

@@ -1,20 +1,20 @@
 ---
 import Service from "../Shared/ServiceCarousel.astro";
+import contentfulClient from "#lib/contentfulClient";
 
-const services = [
-  { title: "Competition & Consumer", href: "competition-and-consumer" },
-  { title: "Corporate & Finance", href: "corporate-and-finance" },
-  { title: "Corporate Governance", href: "corporate-governance" },
-  { title: "Data Protection", href: "data-protection" },
-  { title: "Employment", href: "employment" },
-  { title: "Procurement & Outsourcing", href: "procurement-and-outsourcing" },
-  { title: "Disputes", href: "disputes" },
-  {
-    title: "Telcoms, Media & Technology",
-    href: "telcoms-media-and-technology",
-  },
-  { title: "Commercial", href: "commercial" },
-];
+export async function getStaticPaths({ paginate }: any) {
+  const entries = await contentfulClient.getEntries({
+    content_type: "service",
+  });
+
+  const services = entries.items as any;
+
+  return paginate(services, {
+    pageSize: 12,
+  });
+}
+
+const { page } = Astro.props as any;
 
 const duplicatedServices = [...services, ...services]; // Duplicate services for seamless effect
 ---
@@ -33,7 +33,13 @@ const duplicatedServices = [...services, ...services]; // Duplicate services for
       {
         duplicatedServices.map((service, index) => (
           <li class="flex-shrink-0 px-4">
-            <Service key={index} title={service.title} href={service.href} />
+            {page.data.map((o) => (
+              <Service
+                key={index}
+                title={o.fields.title}
+                href={o.fields.slug}
+              />
+            ))}
           </li>
         ))
       }
@@ -58,3 +64,4 @@ const duplicatedServices = [...services, ...services]; // Duplicate services for
     animation: scroll 60s linear infinite;
   }
 </style>
+
