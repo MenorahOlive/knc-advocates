@@ -2,26 +2,13 @@
 import Service from "../Shared/ServiceCarousel.astro";
 import contentfulClient from "#lib/contentfulClient";
 
-export async function getStaticPaths({ paginate }) {
-  const entries = await contentfulClient.getEntries({
-    content_type: "service",
-  });
+const entries = await contentfulClient.getEntries({
+  content_type: "service",
+});
 
-  // Extract the items from entries
-  const services = entries.items;
+const services = entries.items as any;
 
-  // Return paginated data with proper structure
-  return paginate(services, {
-    pageSize: 12,
-    props: { services }, // Pass additional props if needed
-  });
-}
-
-// Destructure the page prop correctly
-const { page } = Astro.props;
-
-// Make sure page.data exists before duplicating
-const services = page?.data || [];
+// Duplicate services for seamless carousel effect
 const duplicatedServices = [...services, ...services];
 ---
 
@@ -31,11 +18,14 @@ const duplicatedServices = [...services, ...services];
   >
     Services
   </h2>
+
+  <!-- Carousel Container -->
   <div class="relative min-w-[1500px] mx-auto overflow-hidden">
+    <!-- Carousel Track -->
     <ul class="flex min-w-full whitespace-nowrap animate-scroll">
       {
         duplicatedServices.map((service, index) => (
-          <li key={index} class="flex-shrink-0 px-4">
+          <li class="flex-shrink-0 px-4">
             <Service title={service.fields.title} href={service.fields.slug} />
           </li>
         ))
@@ -44,6 +34,7 @@ const duplicatedServices = [...services, ...services];
   </div>
 </section>
 
+<!-- Tailwind & Keyframes for Smooth Infinite Scrolling -->
 <style>
   @keyframes scroll {
     from {
@@ -53,6 +44,7 @@ const duplicatedServices = [...services, ...services];
       transform: translateX(-50%);
     }
   }
+
   .animate-scroll {
     display: flex;
     width: max-content;
