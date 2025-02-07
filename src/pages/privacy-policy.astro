@@ -3,28 +3,23 @@ import SectionHeader from "#components/Shared/SectionHeader.astro";
 import contentfulClient from "#lib/contentfulClient.ts";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
-const { content } = Astro.props as any;
-
 const entries = await contentfulClient.getEntries({
   content_type: "privacyPolicy",
 });
 
-const policy = entries.items as any;
+const policies = entries.items as any;
 
-policy.map((item) => ({
-  title: item.fields.title,
-  subtitle: item.fields.subtitle,
-  description: item.fields.subtitle,
-}));
+//Assign the first policy to policy as there should only be one
+const policy = policies[0];
 ---
 
 <SectionHeader
-  title={policy.title}
-  description={policy.description}
-  subtitle={policy.subtitle}
+  title={policy.fields.title}
+  description={policy.fields.description}
+  subtitle={policy.fields.subtitle}
 >
   <article
-    set:html={content}
+    set:html={policy.fields.content}
     class="prose-headings:font-bold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-p:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-tertiary pb-10 text-justify text-secondary"
   />
 </SectionHeader>
