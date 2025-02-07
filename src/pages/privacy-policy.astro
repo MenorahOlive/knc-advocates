@@ -11,6 +11,9 @@ const policies = entries.items as any;
 
 //Assign the first policy to policy as there should only be one
 const policy = policies[0];
+
+//Create appropriate html to insert into article
+const content = documentToHtmlString(policy.fields.content);
 ---
 
 <SectionHeader
@@ -19,7 +22,7 @@ const policy = policies[0];
   subtitle={policy.fields.subtitle}
 >
   <article
-    set:html={policy.fields.content}
+    set:html={content}
     class="prose-headings:font-bold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-p:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-tertiary pb-10 text-justify text-secondary"
   />
 </SectionHeader>
