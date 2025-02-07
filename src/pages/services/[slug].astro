@@ -5,52 +5,47 @@ import contentfulClient from "#lib/contentfulClient.ts";
 
 const mainHeading = "What commercial legal services we offer";
 
-const items = [
-  {
-    title: "Procurement and Outsourcing",
-    description:
-      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
-  },
-  {
-    title: "Franchising and Distribution Arrangements",
-    description:
-      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
-  },
-];
-
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries({
-    content_type: "insight",
+    content_type: "service",
+    include: 2,
   });
 
-  let options = {
-    renderNode: {
-      "embedded-asset-block": (node: any) =>
-        `<img  src="${node.data.target.fields.file.url}"/>`,
-    },
-  };
+  const pages = await Promise.all(
+    entries.items.map(async (item: any) => {
+      // Get miniServices for this specific service
+      const miniServices = await contentfulClient.getEntries({
+        content_type: "miniService",
+        "fields.mainService.sys.contentType.sys.id": "service",
+        "fields.mainService.fields.slug": item.fields.slug,
+        include: 2,
+      });
 
-  const pages = entries.items.map((item) => ({
-    params: { slug: item.fields.slug },
-    props: {
-      title: item.fields.title,
+      return {
+        params: { slug: item.fields.slug },
+        props: {
+          title: item.fields.title,
+          subtitle: item.fields.subtitle,
+          description: item.fields.description,
+          slug: item.fields.slug,
+          miniServices: miniServices.items,
+        },
+      };
+    })
+  );
 
-      brief: item.fields.brief,
-
-      slug: item.fields.slug,
-    },
-  }));
   return pages;
 }
 
-const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
-  Astro.props as any;
+const { title, subtitle, description, miniServices } = Astro.props as any;
+
+const items = miniServices.map((item: any) => ({
+  title: item.fields.miniServiceTitle,
+  description: item.fields.description,
+  href: item.fields.slug,
+}));
 ---
 
-<SectionHeader
-  title="Commercial Law"
-  description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
-  subtitle="Strategic Commercial Legal Support for Businesses of All Sizes"
->
+<SectionHeader title={title} description={description} subtitle={subtitle}>
   <Accordion items={items} mainHeading={mainHeading} />
 </SectionHeader>
