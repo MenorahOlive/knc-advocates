@@ -1,7 +1,10 @@
 ---
-import Arrow from "./Arrow.astro";
+export interface serviceProps {
+  title: string;
+  href: string;
+}
 
-const { title, href } = Astro.props;
+const { title, href } = Astro.props as serviceProps;
 ---
 
 <a href={href}>

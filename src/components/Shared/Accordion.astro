@@ -35,26 +35,17 @@ const { mainHeading, items } = Astro.props;
 </div>
 
 <script>
-  // Wait for the DOM to load
   document.addEventListener("DOMContentLoaded", () => {
-    // Get all accordion headers (h4 elements)
     const headers = document.querySelectorAll("h4[data-index]");
-
-    // Variable to keep track of the currently open accordion item
     let currentlyOpen = null;
 
-    // Add a click event listener to each header
     headers.forEach((header) => {
       header.addEventListener("click", () => {
-        // Get the data-index attribute to identify the clicked header
         const index = header.getAttribute("data-index");
-
-        // Find the corresponding description using the data-index
         const content = document.querySelector(
           `.accordion-content[data-index="${index}"]`
         );
 
-        // If there's a currently open accordion item, close it
         if (currentlyOpen !== null && currentlyOpen !== index) {
           const previouslyOpenContent = document.querySelector(
             `.accordion-content[data-index="${currentlyOpen}"]`
@@ -67,14 +58,10 @@ const { mainHeading, items } = Astro.props;
           previouslyOpenIcon.classList.remove("rotate-45");
         }
 
-        // Toggle the visibility of the clicked description
         content.classList.toggle("hidden");
-
-        // Find the image inside the clicked header and rotate it
         const icon = header.querySelector(".accordion-icon");
         icon.classList.toggle("rotate-45");
 
-        // Update the currently open accordion item
         currentlyOpen = content.classList.contains("hidden") ? null : index;
       });
     });
@@ -87,7 +74,7 @@ const { mainHeading, items } = Astro.props;
   }
 
   .rotate-45 {
-    transform: rotate(225deg);
+    transform: rotate(135deg);
   }
 
   .accordion-icon {
