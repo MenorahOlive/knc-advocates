@@ -2,21 +2,27 @@
 import Service from "../Shared/ServiceCarousel.astro";
 import contentfulClient from "#lib/contentfulClient";
 
-export async function getStaticPaths({ paginate }: any) {
+export async function getStaticPaths({ paginate }) {
   const entries = await contentfulClient.getEntries({
     content_type: "service",
   });
 
-  const services = entries.items as any;
+  // Extract the items from entries
+  const services = entries.items;
 
+  // Return paginated data with proper structure
   return paginate(services, {
     pageSize: 12,
+    props: { services }, // Pass additional props if needed
   });
 }
 
-const { page } = Astro.props as any;
+// Destructure the page prop correctly
+const { page } = Astro.props;
 
-const duplicatedServices = [...services, ...services]; // Duplicate services for seamless effect
+// Make sure page.data exists before duplicating
+const services = page?.data || [];
+const duplicatedServices = [...services, ...services];
 ---
 
 <section class="container mx-auto px-4 py-20 md:py-24 overflow-hidden">
@@ -25,21 +31,12 @@ const duplicatedServices = [...services, ...services]; // Duplicate services for
   >
     Services
   </h2>
-
-  <!-- Carousel Container -->
   <div class="relative min-w-[1500px] mx-auto overflow-hidden">
-    <!-- Carousel Track -->
-    <ul class="flex min-w-full whitespace-warp animate-scroll">
+    <ul class="flex min-w-full whitespace-nowrap animate-scroll">
       {
         duplicatedServices.map((service, index) => (
-          <li class="flex-shrink-0 px-4">
-            {page.data.map((o) => (
-              <Service
-                key={index}
-                title={o.fields.title}
-                href={o.fields.slug}
-              />
-            ))}
+          <li key={index} class="flex-shrink-0 px-4">
+            <Service title={service.fields.title} href={service.fields.slug} />
           </li>
         ))
       }
@@ -47,7 +44,6 @@ const duplicatedServices = [...services, ...services]; // Duplicate services for
   </div>
 </section>
 
-<!-- Tailwind & Keyframes for Smooth Infinite Scrolling -->
 <style>
   @keyframes scroll {
     from {
@@ -57,11 +53,9 @@ const duplicatedServices = [...services, ...services]; // Duplicate services for
       transform: translateX(-50%);
     }
   }
-
   .animate-scroll {
     display: flex;
     width: max-content;
     animation: scroll 60s linear infinite;
   }
 </style>
-
