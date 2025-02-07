@@ -7,10 +7,8 @@ export interface serviceProps {
 const { title, href } = Astro.props as serviceProps;
 ---
 
-<a href={href}>
-  <li
-    class="font-lemonmilk bg-secondary text-primary border hover:border-secondary hover:bg-primary hover:text-secondary aspect-square grid place-content-center p-10 text-2xl 2xl:text-4xl text-center active:border-tertiary focus:border-tertiary"
-  >
-    {title}
-  </li>
-</a>
+<li
+  class="font-lemonmilk bg-secondary text-primary border hover:border-secondary hover:bg-primary hover:text-secondary aspect-square grid place-content-center p-10 text-2xl 2xl:text-4xl text-center active:border-tertiary focus:border-tertiary"
+>
+  <a href={href}> {title}</a>
+</li>

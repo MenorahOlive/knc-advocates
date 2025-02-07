@@ -1,19 +1,17 @@
 ---
 import Insight from "../Shared/Insight.astro";
-const inisghts = [
-  {
-    title: "Demystifying Intellectual Property: Protect Your Ideas",
-    href: "/insights/demystifying-intellectual-property",
-  },
-  {
-    title: "Litigation vs. Arbitration: Which Path is Right for You?",
-    href: "/insights/litigation-vs-arbitration",
-  },
-  {
-    title: "Navigating Corporate Compliance: Tips for Business Owners",
-    href: "/insights/navigating-corporate-compliance",
-  },
-];
+import contentfulClient from "#lib/contentfulClient";
+
+// Fetch insights from Contentful, sorted by creation date in descending order
+const entries = await contentfulClient.getEntries({
+  content_type: "insight",
+  order: ["-sys.createdAt"], // Use an array of strings for the order parameter
+  limit: 3, // Only fetch 3 entries
+});
+
+const insights = entries.items as any;
+
+const { page } = Astro.props as any;
 ---
 
 <section class="bg-secondary">
@@ -27,8 +25,8 @@ const inisghts = [
     </h3>
     <ul class="flex flex-col">
       {
-        inisghts.map((insight) => (
-          <Insight title={insight.title} href={insight.href} />
+        insights.map((o) => (
+          <Insight title={o.fields.title} href={o.fields.slug} />
         ))
       }
     </ul>

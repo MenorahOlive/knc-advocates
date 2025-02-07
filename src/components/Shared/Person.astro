@@ -3,15 +3,20 @@ import Image from "astro/components/Image.astro";
 
 interface Props {
   name: string;
-  image: ImageMetadata;
+  image: {
+    src: any;
+    alt: string;
+  };
 }
 const { name, image } = Astro.props;
 ---
 
 <li class="h-[500px] relative overflow-hidden group">
   <Image
-    src={image}
-    alt={name}
+    src={image.src}
+    alt={image.alt}
+    width={128}
+    height={128}
     class="w-full h-full object-cover aspect-video object-center group-hover:scale-105 transition-transform duration-1000"
   />
 

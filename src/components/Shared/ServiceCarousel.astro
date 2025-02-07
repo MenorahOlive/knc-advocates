@@ -4,10 +4,8 @@ import Arrow from "./Arrow.astro";
 const { title, href } = Astro.props;
 ---
 
-<a href={href}
-  ><li
-    class="font-lemonmilk bg-secondary text-primary aspect-square grid place-content-center text-warp w-[400px] p-10 text-2xl 2xl:text-4xl text-center"
-  >
-    {title}
-  </li></a
+<li
+  class="font-lemonmilk bg-secondary text-primary aspect-square grid place-content-center text-wrap w-[400px] p-10 text-2xl 2xl:text-4xl text-center"
 >
+  <a href={href}> {title}</a>
+</li>

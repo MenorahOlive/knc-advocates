@@ -4,15 +4,27 @@ import contentfulClient from "#lib/contentfulClient.ts";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 const { content } = Astro.props as any;
+
+const entries = await contentfulClient.getEntries({
+  content_type: "privacyPolicy",
+});
+
+const policy = entries.items as any;
+
+policy.map((item) => ({
+  title: item.fields.title,
+  subtitle: item.fields.subtitle,
+  description: item.fields.subtitle,
+}));
 ---
 
 <SectionHeader
-  title="Privacy Policy"
-  description="Kinyanjui Njeru & Co Advocates is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website or engage with our legal services."
-  subtitle="Effective  date: 15/02/25"
+  title={policy.title}
+  description={policy.description}
+  subtitle={policy.subtitle}
 >
   <article
     set:html={content}
-    class="prose-headings:font-bold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-p:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-tertiary border-b border-secondary pb-10 text-justify text-secondary"
+    class="prose-headings:font-bold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-p:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-tertiary pb-10 text-justify text-secondary"
   />
 </SectionHeader>

@@ -10,7 +10,7 @@ const { title, href } = Astro.props;
 
 <li class="border-t-2 last:border-b-2 hover:bg-primary/5">
   <a
-    href={href}
+    href={`/insights/${href}`}
     class="justify-between items-center py-10 px-2 border-primary font-neuelight text-lg xl:text-xl 2xl:text-2xl flex w-full h-full group"
   >
     {title}
