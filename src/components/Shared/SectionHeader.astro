@@ -10,7 +10,12 @@ interface Props {
 const { title, subtitle, description } = Astro.props;
 ---
 
-<Layout title={title} description={description} type="website" image="">
+<Layout
+  title={title}
+  description={description}
+  type="website"
+  image="https://i.postimg.cc/qqDwZ6ZV/logo-large.png"
+>
   <main class="min-h-[50vh] pt-32 max-w-[1500px] mx-auto px-10">
     <div class="flex flex-col items-center gap-10">
       <h1
