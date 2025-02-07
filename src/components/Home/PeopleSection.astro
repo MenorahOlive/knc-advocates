@@ -1,20 +1,14 @@
 ---
-import placeholderPerson1 from "#assets/images/woman-placeholder-1.png";
-import placeholderPerson2 from "#assets/images/woman-placeholder-2.png";
-import Arrow from "#components/Shared/Arrow.astro";
 import Person from "#components/Shared/Person.astro";
 import Image from "astro/components/Image.astro";
 import ArrowStraight from "#assets/icons/arrow-straight.svg";
-const people = [
-  {
-    name: "Joyce Nderu",
-    image: placeholderPerson1,
-  },
-  {
-    name: "Joyce Nderu",
-    image: placeholderPerson2,
-  },
-];
+import contentfulClient from "#lib/contentfulClient";
+
+const entries = await contentfulClient.getEntries({
+  content_type: "person",
+});
+
+const people = entries.items as any;
 ---
 
 <section
@@ -47,6 +41,16 @@ const people = [
     >
   </div>
   <ul class="lg:col-span-2 grid sm:grid-cols-2 gap-10 content-center">
-    {people.map((person) => <Person name={person.name} image={person.image} />)}
+    {
+      people.map((o) => (
+        <Person
+          name={o.fields.name}
+          image={{
+            src: o.fields.image.fields.file.url,
+            alt: o.fields.image.fields.title,
+          }}
+        />
+      ))
+    }
   </ul>
 </section>

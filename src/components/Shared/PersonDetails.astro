@@ -6,15 +6,23 @@ import PhoneIcon from "#assets/icons/phone-yellow.svg";
 
 interface Props {
   name: string;
-  image: ImageMetadata;
+  image: {
+    src: any;
+    alt: string;
+  };
+  linkedIn: string;
+  email: string;
+  phoneNumber: string;
 }
-const { name, image } = Astro.props;
+const { name, image, linkedIn, email, phoneNumber } = Astro.props;
 ---
 
 <li class="h-[500px] relative overflow-hidden group">
   <Image
-    src={image}
-    alt={name}
+    src={image.src}
+    alt={image.alt}
+    width={128}
+    height={128}
     class="w-full h-full object-cover aspect-video object-center group-hover:scale-105 transition-transform duration-1000"
   />
 
@@ -25,17 +33,17 @@ const { name, image } = Astro.props;
     <div
       class="flex pt-5 flex-row gap-5 content-center items-center justify-center"
     >
-      <a href=""
+      <a href={linkedIn}
         ><Image
           src={LinkedinIcon}
           alt="linkedin icon"
           class="w-6 hover:scale-105"
         /></a
       >
-      <a href=""
+      <a href={email}
         ><Image src={MailIcon} alt="mail icon" class="w-6 hover:scale-105" /></a
       >
-      <a href=""
+      <a href={phoneNumber}
         ><Image
           src={PhoneIcon}
           alt="phone icon"

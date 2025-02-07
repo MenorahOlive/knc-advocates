@@ -1,22 +1,15 @@
 ---
 import Service from "../Shared/ServiceCarousel.astro";
+import contentfulClient from "#lib/contentfulClient";
 
-const services = [
-  { title: "Competition & Consumer", href: "competition-and-consumer" },
-  { title: "Corporate & Finance", href: "corporate-and-finance" },
-  { title: "Corporate Governance", href: "corporate-governance" },
-  { title: "Data Protection", href: "data-protection" },
-  { title: "Employment", href: "employment" },
-  { title: "Procurement & Outsourcing", href: "procurement-and-outsourcing" },
-  { title: "Disputes", href: "disputes" },
-  {
-    title: "Telcoms, Media & Technology",
-    href: "telcoms-media-and-technology",
-  },
-  { title: "Commercial", href: "commercial" },
-];
+const entries = await contentfulClient.getEntries({
+  content_type: "service",
+});
 
-const duplicatedServices = [...services, ...services]; // Duplicate services for seamless effect
+const services = entries.items as any;
+
+// Duplicate services for seamless carousel effect
+const duplicatedServices = [...services, ...services];
 ---
 
 <section class="container mx-auto px-4 py-20 md:py-24 overflow-hidden">
@@ -29,11 +22,11 @@ const duplicatedServices = [...services, ...services]; // Duplicate services for
   <!-- Carousel Container -->
   <div class="relative min-w-[1500px] mx-auto overflow-hidden">
     <!-- Carousel Track -->
-    <ul class="flex min-w-full whitespace-warp animate-scroll">
+    <ul class="flex min-w-full whitespace-nowrap animate-scroll">
       {
         duplicatedServices.map((service, index) => (
           <li class="flex-shrink-0 px-4">
-            <Service key={index} title={service.title} href={service.href} />
+            <Service title={service.fields.title} href={service.fields.slug} />
           </li>
         ))
       }

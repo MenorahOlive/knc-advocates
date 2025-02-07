@@ -4,29 +4,40 @@ import Accordion from "#components/Shared/Accordion.astro";
 import PeopleSection from "#components/Home/PeopleSection.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
 import ContactForm from "#components/Shared/ContactForm.astro";
+import contentfulClient from "#lib/contentfulClient";
 
-const mainHeading = "What Services we Offer";
+const mainHeading = "What Services We Offer";
 
-const items = [
-  {
-    title: "Commercial Law",
-    description:
-      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
-  },
-  {
-    title: "Corporate Law",
-    description:
-      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
-  },
-];
+const entry = await contentfulClient.getEntries({
+  content_type: "aboutPage",
+});
+
+const about = entry.items as any;
+
+//Assign the first policy to policy as there should only be one
+const abouts = about[0];
+
+// Fetch services from Contentful
+const entries = await contentfulClient.getEntries({
+  content_type: "service",
+});
+
+// Sort the entries by the `order` field in the `fields` object
+entries.items.sort((a: any, b: any) => a.fields.order - b.fields.order);
+
+// Map the sorted data to the required structure
+const services = entries.items.map((item) => ({
+  title: item.fields.title,
+  description: item.fields.description,
+}));
 ---
 
 <SectionHeader
-  title="About"
-  description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
-  subtitle="Exceptional law requires exceptional qualitites."
+  title={abouts.fields.title}
+  description={abouts.fields.description}
+  subtitle={abouts.fields.subtitle}
 >
-  <Accordion items={items} mainHeading={mainHeading} />
+  <Accordion items={services} mainHeading={mainHeading} />
 
   <div
     class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"

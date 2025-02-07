@@ -1,39 +1,54 @@
 ---
 import SectionHeader from "#components/Shared/SectionHeader.astro";
-import placeholderPerson1 from "#assets/images/woman-placeholder-1.png";
-import placeholderPerson2 from "#assets/images/woman-placeholder-2.png";
 import PersonDetails from "#components/Shared/PersonDetails.astro";
-import Image from "astro/components/Image.astro";
 import ContactForm from "#components/Shared/ContactForm.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
-const people = [
-  {
-    name: "Joyce Nderu",
-    image: placeholderPerson1,
-  },
-  {
-    name: "Joyce Nderu",
-    image: placeholderPerson2,
-  },
-];
+import contentfulClient from "#lib/contentfulClient";
+
+const entry = await contentfulClient.getEntries({
+  content_type: "peoplePage",
+});
+
+const service = entry.items as any;
+
+//Assign the first policy to policy as there should only be one
+const services = service[0];
+
+const entries = await contentfulClient.getEntries({
+  content_type: "person",
+});
+
+const people = entries.items as any;
 ---
 
 <SectionHeader
-  title="People"
-  description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
-  subtitle="Exceptional law requires exceptional individuals."
+  title={services.fields.title}
+  description={services.fields.description}
+  subtitle={services.fields.subtitle}
 >
   <section
     class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-10 px-5 lg:px-10 max-w-[1500px] mx-auto"
   >
     <ul class="lg:col-span-2 grid sm:grid-cols-2 gap-10 content-center">
       {
-        people.map((person) => (
-          <PersonDetails name={person.name} image={person.image} />
-        ))
+        people
+          .sort((a, b) => a.fields.order - b.fields.order)
+          .map((o) => (
+            <PersonDetails
+              name={o.fields.name}
+              linkedIn={o.fields.linkedIn}
+              email={o.fields.email}
+              phoneNumber={o.fields.phoneNumber}
+              image={{
+                src: o.fields.image.fields.file.url,
+                alt: o.fields.image.fields.title,
+              }}
+            />
+          ))
       }
     </ul>
   </section>
+
   <div
     class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
   >
