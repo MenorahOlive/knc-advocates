@@ -1,22 +1,11 @@
 ---
-import SectionHeader from "#components/Shared/SectionHeader.astro";
-import Accordion from "#components/Shared/Accordion.astro";
+import Layout from "../../layouts/Layout.astro";
 import contentfulClient from "#lib/contentfulClient.ts";
-
-const mainHeading = "What commercial legal services we offer";
-
-const items = [
-  {
-    title: "Procurement and Outsourcing",
-    description:
-      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
-  },
-  {
-    title: "Franchising and Distribution Arrangements",
-    description:
-      "The procurement process relies on your ability to identify reliable, cost effective suppliers and maintain lasting relationships. Our team of commercial lawyers specialise in all aspects of procurement including contract negotiation, supplier management, and improving procurement processes for your business.",
-  },
-];
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import formatDate from "#lib/dateMethods";
+import { Image } from "astro:assets";
+import imageOptimizer from "#lib/imageOptimizer";
+import SectionHeader from "#components/Shared/SectionHeader.astro";
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries({
@@ -34,9 +23,12 @@ export async function getStaticPaths() {
     params: { slug: item.fields.slug },
     props: {
       title: item.fields.title,
-
+      content: documentToHtmlString(item.fields.content as any, options),
       brief: item.fields.brief,
-
+      dateCreated: formatDate(item.sys.createdAt as string),
+      author: item.fields.author,
+      image: (item.fields.headlineImage as any).fields.file.url,
+      imageAlt: (item.fields.headlineImage as any).fields.title,
       slug: item.fields.slug,
     },
   }));
