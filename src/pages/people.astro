@@ -1,21 +1,15 @@
 ---
 import SectionHeader from "#components/Shared/SectionHeader.astro";
-import placeholderPerson1 from "#assets/images/woman-placeholder-1.png";
-import placeholderPerson2 from "#assets/images/woman-placeholder-2.png";
 import PersonDetails from "#components/Shared/PersonDetails.astro";
-import Image from "astro/components/Image.astro";
 import ContactForm from "#components/Shared/ContactForm.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
-const people = [
-  {
-    name: "Joyce Nderu",
-    image: placeholderPerson1,
-  },
-  {
-    name: "Joyce Nderu",
-    image: placeholderPerson2,
-  },
-];
+import contentfulClient from "#lib/contentfulClient";
+
+const entries = await contentfulClient.getEntries({
+  content_type: "person",
+});
+
+const people = entries.items as any;
 ---
 
 <SectionHeader
@@ -28,12 +22,24 @@ const people = [
   >
     <ul class="lg:col-span-2 grid sm:grid-cols-2 gap-10 content-center">
       {
-        people.map((person) => (
-          <PersonDetails name={person.name} image={person.image} />
-        ))
+        people
+          .sort((a, b) => a.fields.order - b.fields.order)
+          .map((o) => (
+            <PersonDetails
+              name={o.fields.name}
+              linkedIn={o.fields.linkedIn}
+              email={o.fields.email}
+              phoneNumber={o.fields.phoneNumber}
+              image={{
+                src: o.fields.image.fields.file.url,
+                alt: o.fields.image.fields.title,
+              }}
+            />
+          ))
       }
     </ul>
   </section>
+
   <div
     class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
   >
