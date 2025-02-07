@@ -5,6 +5,15 @@ import InsightSection from "#components/Home/InsightSection.astro";
 import PeopleSection from "#components/Home/PeopleSection.astro";
 import contentfulClient from "#lib/contentfulClient.ts";
 
+const entry = await contentfulClient.getEntries({
+  content_type: "servicePage",
+});
+
+const service = entry.items as any;
+
+//Assign the first policy to policy as there should only be one
+const services = service[0];
+
 export async function getStaticPaths({ paginate }: any) {
   const entries = await contentfulClient.getEntries({
     content_type: "service",
@@ -21,9 +30,9 @@ const { page } = Astro.props as any;
 ---
 
 <SectionHeader
-  title="Services"
-  description="At Kinyanjui Njeru & Co Advocates, our people are at the heart of everything we do. We believe that when our lawyers are fulfilled in their work, they deliver the best results for our clients. That’s why we built Kinyanjui Njeru & Co Advocates—to empower ambitious legal professionals with a platform that supports their career growth while ensuring clients receive top-tier legal services. In an industry driven by relationships, having a team that shares our expertise and values makes all the difference."
-  subtitle="Exceptional law requires exceptional services."
+  title={services.fields.title}
+  description={services.fields.description}
+  subtitle={services.fields.subtitle}
 >
   <section class="container mx-auto px-4 py-10 max-w-[1500px]">
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">

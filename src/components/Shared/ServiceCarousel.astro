@@ -5,7 +5,8 @@ const { title, href } = Astro.props;
 ---
 
 <li
-  class="font-lemonmilk bg-secondary text-primary aspect-square grid place-content-center text-wrap w-[400px] p-10 text-2xl 2xl:text-4xl text-center"
+  class="font-lemonmilk bg-secondary text-primary aspect-square grid place-content-center text-wrap w-[400px] p-10 text-2xl 2xl:text-4xl text-center border hover:border-secondary hover:bg-primary hover:text-secondary active:border-tertiary focus:border-tertiary transition-all duration-500
+  ease-in-out"
 >
-  <a href={href}> {title}</a>
+  <a href={`/services/${href}`}> {title}</a>
 </li>

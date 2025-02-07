@@ -1,7 +1,7 @@
 ---
 import SectionHeader from "#components/Shared/SectionHeader.astro";
-import contentfulClient from "#lib/contentfulClient.ts";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import contentfulClient from "#lib/contentfulClient.ts";
 
 const entries = await contentfulClient.getEntries({
   content_type: "privacyPolicy",

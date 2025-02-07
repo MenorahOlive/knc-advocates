@@ -2,8 +2,11 @@
 import SectionHeader from "#components/Shared/SectionHeader.astro";
 import Accordion from "#components/Shared/Accordion.astro";
 import contentfulClient from "#lib/contentfulClient.ts";
+import ContactForm from "#components/Shared/ContactForm.astro";
+import InsightSection from "#components/Home/InsightSection.astro";
+import PeopleSection from "#components/Home/PeopleSection.astro";
 
-const mainHeading = "What commercial legal services we offer";
+const mainHeading = "What Services We Offer";
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries({
@@ -48,4 +51,12 @@ const items = miniServices.map((item: any) => ({
 
 <SectionHeader title={title} description={description} subtitle={subtitle}>
   <Accordion items={items} mainHeading={mainHeading} />
+
+  <div
+    class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
+  >
+    <PeopleSection />
+    <InsightSection />
+    <ContactForm />
+  </div>
 </SectionHeader>

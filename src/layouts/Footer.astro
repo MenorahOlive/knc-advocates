@@ -4,17 +4,26 @@ import Navlink from "#components/Navbar/Navlink.astro";
 import logo from "#assets/icons/logo.svg";
 import Image from "astro/components/Image.astro";
 import linkedin from "#assets/icons/linked-in.png";
+import contentfulClient from "#lib/contentfulClient";
+
+const entries = await contentfulClient.getEntries({
+  content_type: "companyDetails",
+});
+
+const detail = entries.items as any;
+
+const details = detail[0];
 ---
 
-<footer class="bg-secondary text-primary py-16 px-20">
+<footer class="bg-secondary text-primary py-16 px-20 mt-10">
   <section
     class="flex flex-col sm:flex-row gap-10 sm:justify-between max-w-[1500px] mx-auto px-5 sm:px-10 items-center sm:items-start text-center"
   >
     <div
       class="text-md xl:text-lg 2xl:text-xl font-neuelight flex flex-col gap-4"
     >
-      <p>Nairobi, Kenya</p>
-      <a href="tel:++254726415263">+254-726-415263</a>
+      <p>{details.fields.location}</p>
+      <a href={details.fields.phoneNumber}>{details.fields.phoneNumber}</a>
     </div>
     <div
       class="flex flex-col-reverse items-center md:flex-row md:items-end gap-10"
@@ -30,7 +39,7 @@ import linkedin from "#assets/icons/linked-in.png";
           }
         </ul>
       </nav>
-      <a href=""
+      <a href={details.fields.linkedIn}
         ><Image
           src={linkedin}
           alt="linkedlogo"
