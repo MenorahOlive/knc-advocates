@@ -4,7 +4,6 @@ import PersonDetails from "#components/Shared/PersonDetails.astro";
 import ContactForm from "#components/Shared/ContactForm.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
 import contentfulClient from "#lib/contentfulClient";
-import PeopleSection from "#components/Home/PeopleSection.astro";
 
 const entry = await contentfulClient.getEntries({
   content_type: "peoplePage",
@@ -27,13 +26,11 @@ const people = entries.items as any;
   description={services.fields.description}
   subtitle={services.fields.subtitle}
 >
-  <div
-    class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
-  >
-    <section
-      class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-10 px-5 lg:px-10 max-w-[1500px] mx-auto"
-    >
-      <ul class="lg:col-span-2 grid sm:grid-cols-2 gap-10 content-center">
+  <div class="overflow-x-visible w-screen relative left-1/2 -translate-x-1/2">
+    <section>
+      <ul
+        class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-10 px-5 lg:px-10 max-w-[1500px] mx-auto"
+      >
         {
           people
             .sort((a, b) => a.fields.order - b.fields.order)
