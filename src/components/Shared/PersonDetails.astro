@@ -27,29 +27,45 @@ const { name, image, linkedIn, email, phoneNumber } = Astro.props;
   />
 
   <h4
-    class="w-full absolute bottom-0 backdrop-blur-lg bg-secondary/30 text-primary text-center text-xl uppercase font-lemonmilk py-5 transform translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"
+    class="w-full absolute bottom-0 backdrop-blur-lg bg-secondary/30 text-primary text-center text-xl uppercase font-lemonmilk py-10 transform translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"
   >
     {name}
     <div
       class="flex pt-5 flex-row gap-5 content-center items-center justify-center"
     >
-      <a href={linkedIn}
-        ><Image
+      <!-- LinkedIn Icon -->
+      <a href={linkedIn} class="relative group/icon">
+        <Image
           src={LinkedinIcon}
           alt="linkedin icon"
           class="w-6 hover:scale-105"
-        /></a
-      >
-      <a href={email}
-        ><Image src={MailIcon} alt="mail icon" class="w-6 hover:scale-105" /></a
-      >
-      <a href={phoneNumber}
-        ><Image
-          src={PhoneIcon}
-          alt="phone icon"
-          class="w-6 hover:scale-105"
-        /></a
-      >
+        />
+        <span
+          class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-primary/10 text-primary text-xs px-2 py-1 rounded opacity-0 group-hover/icon:opacity-100 transition-opacity duration-200"
+        >
+          LinkedIn
+        </span>
+      </a>
+
+      <!-- Email Icon -->
+      <a href={`mailto:${email}`} class="relative group/icon">
+        <Image src={MailIcon} alt="mail icon" class="w-6 hover:scale-105" />
+        <span
+          class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-primary/10 text-primary text-xs px-2 py-1 rounded opacity-0 group-hover/icon:opacity-100 transition-opacity duration-200"
+        >
+          {email}
+        </span>
+      </a>
+
+      <!-- Phone Icon -->
+      <a href={`tel:${phoneNumber}`} class="relative group/icon">
+        <Image src={PhoneIcon} alt="phone icon" class="w-6 hover:scale-105" />
+        <span
+          class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-primary/10 text-primary text-xs px-2 py-1 rounded opacity-0 group-hover/icon:opacity-100 transition-opacity duration-200"
+        >
+          {phoneNumber}
+        </span>
+      </a>
     </div>
   </h4>
 </li>
