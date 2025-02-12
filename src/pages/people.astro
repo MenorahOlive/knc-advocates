@@ -26,32 +26,31 @@ const people = entries.items as any;
   description={services.fields.description}
   subtitle={services.fields.subtitle}
 >
-  <section
-    class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-10 px-5 lg:px-10 max-w-[1500px] mx-auto"
-  >
-    <ul class="lg:col-span-2 grid sm:grid-cols-2 gap-10 content-center">
-      {
-        people
-          .sort((a, b) => a.fields.order - b.fields.order)
-          .map((o) => (
-            <PersonDetails
-              name={o.fields.name}
-              linkedIn={o.fields.linkedIn}
-              email={o.fields.email}
-              phoneNumber={o.fields.phoneNumber}
-              image={{
-                src: o.fields.image.fields.file.url,
-                alt: o.fields.image.fields.title,
-              }}
-            />
-          ))
-      }
-    </ul>
-  </section>
-
   <div
     class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
   >
+    <section>
+      <ul
+        class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-10 px-5 lg:px-10 max-w-[1500px] mx-auto"
+      >
+        {
+          people
+            .sort((a, b) => a.fields.order - b.fields.order)
+            .map((o) => (
+              <PersonDetails
+                name={o.fields.name}
+                linkedIn={o.fields.linkedIn}
+                email={o.fields.email}
+                phoneNumber={o.fields.phoneNumber}
+                image={{
+                  src: o.fields.image.fields.file.url,
+                  alt: o.fields.image.fields.title,
+                }}
+              />
+            ))
+        }
+      </ul>
+    </section>
     <InsightSection />
     <ContactForm />
   </div>

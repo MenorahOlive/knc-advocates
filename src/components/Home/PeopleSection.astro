@@ -6,6 +6,7 @@ import contentfulClient from "#lib/contentfulClient";
 
 const entries = await contentfulClient.getEntries({
   content_type: "person",
+  limit: 2,
 });
 
 const people = entries.items as any;
