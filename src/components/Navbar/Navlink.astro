@@ -7,10 +7,10 @@ export interface NavLinkProps {
 const { title, href } = Astro.props as NavLinkProps;
 ---
 
-<li class="hover:scale-105">
+<li class="hover:scale-105 transition-transform duration-300">
   <a
     href={href}
-    class="text-primary font-neue font-neuelight text-center text-md xl:text-lg 2xl:text-xl hover:text-primary/70 focus:text-primary/70"
+    class="text-primary font-neue font-neuelight text-center text-md xl:text-lg 2xl:text-xl hover:text-primary/70 focus:text-primary/70 transition-colors duration-300"
     >{title}</a
   >
 </li>
