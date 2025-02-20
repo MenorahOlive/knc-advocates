@@ -1,13 +1,16 @@
 ---
 import Layout from "src/layouts/Layout.astro";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 interface Props {
   title: string;
-  description: string;
+  description: any;
   subtitle: string;
 }
 
-const { title, subtitle, description } = Astro.props;
+let { title, subtitle, description } = Astro.props;
+
+description = documentToHtmlString(description);
 ---
 
 <Layout
@@ -33,7 +36,10 @@ const { title, subtitle, description } = Astro.props;
       </h2>
     </div>
 
-    <p class="text-xl font-neuelight my-14">{description}</p>
+    <section
+      set:html={description}
+      class="prose-headings:font-bold prose-prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-p:text-xl prose-p:py-2 last:prose-p:mb-0 prose-headings:pt-5 prose-headings:pb-3 prose-ol:list-decimal prose-ul:list-disc prose-ul:ml-7 prose-ol:ml-7 prose-a:text-tertiary pb-10 text-justify text-secondary prose-blockquote:pl-4 prose-blockquote:border-l-4 prose-blockquote:border-secondary/10 p-10"
+    />
 
     <slot />
   </main>

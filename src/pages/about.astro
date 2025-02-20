@@ -15,7 +15,7 @@ const entry = await contentfulClient.getEntries({
 
 const about = entry.items as any;
 
-//Assign the first policy to policy as there should only be one
+// Assign the first policy to policy as there should only be one
 const abouts = about[0];
 
 // Fetch services from Contentful
@@ -33,13 +33,16 @@ const services = entries.items.map((item) => ({
 }));
 ---
 
+<!-- Pass title and subtitle as props to SectionHeader -->
 <SectionHeader
   title={abouts.fields.title}
-  description={abouts.fields.description}
   subtitle={abouts.fields.subtitle}
+  description={abouts.fields.description}
 >
+  <!-- Accordion section -->
   <Accordion items={services} mainHeading={mainHeading} />
 
+  <!-- PeopleSection, InsightSection, and ContactForm -->
   <div
     class="overflow-x-visible w-screen pt-10 relative left-1/2 -translate-x-1/2"
   >
