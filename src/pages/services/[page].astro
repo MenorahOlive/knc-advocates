@@ -38,7 +38,14 @@ const { page } = Astro.props as any;
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
       {
         page.data.map((o) => (
-          <Service title={o.fields.title} href={o.fields.slug} />
+          <Service
+            title={o.fields.title}
+            href={o.fields.slug}
+            image={{
+              src: o.fields.image.fields.file.url,
+              alt: o.fields.image.fields.title,
+            }}
+          />
         ))
       }
     </ul>

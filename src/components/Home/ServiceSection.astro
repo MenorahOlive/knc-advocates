@@ -22,12 +22,14 @@ const duplicatedServices = [...services, ...services];
   <!-- Carousel Container -->
   <div class="relative min-w-[1500px] mx-auto overflow-hidden">
     <!-- Carousel Track -->
-    <ul class="flex min-w-full whitespace-nowrap animate-scroll">
+    <ul class="flex gap-10 min-w-full whitespace-nowrap animate-scroll">
       {
         duplicatedServices.map((service, index) => (
-          <li class="flex-shrink-0 px-4">
-            <Service title={service.fields.title} href={service.fields.slug} />
-          </li>
+          <Service
+            title={service.fields.title}
+            href={service.fields.slug}
+            image={service.fields.image.fields.file.url}
+          />
         ))
       }
     </ul>

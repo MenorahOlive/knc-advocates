@@ -1,12 +1,16 @@
 ---
-import Arrow from "./Arrow.astro";
-
-const { title, href } = Astro.props;
+const { title, href, image } = Astro.props;
 ---
 
 <li
-  class="font-neuelight bg-secondary text-primary aspect-square grid place-content-center text-wrap w-[400px] p-10 text-2xl 2xl:text-4xl text-center border hover:border-secondary hover:bg-primary hover:text-secondary active:border-tertiary focus:border-tertiary transition-all duration-500
-  ease-in-out"
+  class="font-neuelight bg-secondary text-primary aspect-square grid place-content-center text-wrap w-[400px] p-10 text-2xl 2xl:text-4xl text-center border hover:border-secondary hover:bg-primary active:border-tertiary focus:border-tertiary transition-all duration-500
+  ease-in-out group relative overflow-hidden"
 >
-  <a href={`/services/${href}`}> {title}</a>
+  <div
+    class="absolute inset-0 bg-cover bg-center z-0 brightness-50 group-hover:scale-110 transition-transform duration-700"
+    style={`background-image: url(${image});`}
+    aria-hidden="true"
+  >
+  </div>
+  <a href={`/services/${href}`} class="relative z-10"> {title}</a>
 </li>
