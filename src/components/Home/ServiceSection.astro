@@ -1,6 +1,7 @@
 ---
 import Service from "../Shared/ServiceCarousel.astro";
 import contentfulClient from "#lib/contentfulClient";
+import imageOptimizer from "#lib/imageOptimizer";
 
 const entries = await contentfulClient.getEntries({
   content_type: "service",
@@ -28,7 +29,11 @@ const duplicatedServices = [...services, ...services];
           <Service
             title={service.fields.title}
             href={service.fields.slug}
-            image={service.fields.image.fields.file.url}
+            image={imageOptimizer(
+              service.fields.image.fields.file.url,
+              100,
+              100
+            )}
           />
         ))
       }
