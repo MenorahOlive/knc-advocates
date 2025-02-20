@@ -6,7 +6,7 @@ import Navlink, { type NavLinkProps } from "./Navlink.astro";
 
 export const links: NavLinkProps[] = [
   { title: "Home", href: "/" },
-  { title: "About", href: "/about" },
+  { title: "About Us", href: "/about" },
   { title: "Services", href: "/services/1" },
   { title: "People", href: "/people" },
   { title: "Insights", href: "/insights/1" },
@@ -27,7 +27,7 @@ const { isTransparent } = Astro.props;
     ><Image src={logo} alt="Company logo" class="w-44 block sm:hidden" /></a
   >
   {/* Desktop Navigation */}
-  <ul class="gap-7 hidden sm:flex">
+  <ul class="gap-8 hidden sm:flex">
     {links.map((l) => <Navlink title={l.title} href={l.href} />)}
   </ul>
 

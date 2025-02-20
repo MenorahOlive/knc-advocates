@@ -5,6 +5,7 @@ import PeopleSection from "#components/Home/PeopleSection.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
 import ContactForm from "#components/Shared/ContactForm.astro";
 import contentfulClient from "#lib/contentfulClient";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 const mainHeading = "What Services We Offer";
 
