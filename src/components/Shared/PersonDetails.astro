@@ -3,6 +3,7 @@ import Image from "astro/components/Image.astro";
 import LinkedinIcon from "#assets/icons/linkedin-yellow.svg";
 import MailIcon from "#assets/icons/mail-yellow.svg";
 import PhoneIcon from "#assets/icons/phone-yellow.svg";
+import imageOptimizer from "#lib/imageOptimizer";
 
 interface Props {
   name: string;
@@ -19,7 +20,7 @@ const { name, image, linkedIn, email, phoneNumber } = Astro.props;
 
 <li class="h-[500px] relative overflow-hidden group">
   <Image
-    src={image.src}
+    src={imageOptimizer(image.src, 800, 800)}
     alt={image.alt}
     width={128}
     height={128}

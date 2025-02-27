@@ -4,6 +4,7 @@ import Service from "#components/Shared/ServiceCard.astro";
 import InsightSection from "#components/Home/InsightSection.astro";
 import PeopleSection from "#components/Home/PeopleSection.astro";
 import contentfulClient from "#lib/contentfulClient.ts";
+import imageOptimizer from "#lib/imageOptimizer";
 
 const entry = await contentfulClient.getEntries({
   content_type: "servicePage",
@@ -42,7 +43,7 @@ const { page } = Astro.props as any;
             title={o.fields.title}
             href={o.fields.slug}
             image={{
-              src: o.fields.image.fields.file.url,
+              src: imageOptimizer(o.fields.image.fields.file.url, 1000, 1000),
               alt: o.fields.image.fields.title,
             }}
           />

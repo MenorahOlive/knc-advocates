@@ -29,7 +29,11 @@ const duplicatedServices = [...services, ...services];
           <Service
             title={service.fields.title}
             href={service.fields.slug}
-            image={service.fields.image.fields.file.url}
+            image={imageOptimizer(
+              service.fields.image.fields.file.url,
+              1000,
+              1000
+            )}
           />
         ))
       }
