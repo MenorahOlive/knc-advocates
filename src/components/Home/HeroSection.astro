@@ -3,6 +3,7 @@ import Image from "astro/components/Image.astro";
 import background from "#assets/images/hero-background.jpg";
 import logo from "#assets/icons/logo.svg";
 import scales from "#assets/icons/scales.svg";
+import imageOptimizer from "#lib/imageOptimizer";
 ---
 
 <section class="overflow-hidden">
@@ -12,6 +13,8 @@ import scales from "#assets/icons/scales.svg";
         src={background}
         alt="Nairobi Skyline"
         class="w-full h-full object-cover"
+        width={3000}
+        height={3000}
       />
     </div>
 

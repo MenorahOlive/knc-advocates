@@ -61,7 +61,7 @@ const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
         <Image
-          src={imageOptimizer(author.fields.image.fields.file.url, 100, 100)}
+          src={imageOptimizer(author.fields.image.fields.file.url, 600, 600)}
           alt={author.fields.name}
           width={48}
           height={48}
@@ -79,7 +79,7 @@ const { title, content, brief, dateCreated, author, image, imageAlt, slug } =
       </p>
     </div>
     <Image
-      src={image}
+      src={imageOptimizer(image, 1920, 1080)}
       alt={imageAlt}
       width={1920}
       height={1080}
