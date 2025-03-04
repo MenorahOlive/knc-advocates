@@ -1,0 +1,144 @@
+---
+import Content from "#components/Shared/Content.astro";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import contentfulClient from "#lib/contentfulClient.ts";
+import Image from "astro/components/Image.astro";
+import Layout from "../../layouts/Layout.astro";
+import imageOptimizer from "#lib/imageOptimizer";
+
+const imageWidth = 350;
+const imageHeight = 500;
+
+export async function getStaticPaths() {
+  const entries = await contentfulClient.getEntries({
+    content_type: "person",
+  });
+
+  let options = {
+    renderNode: {
+      "embedded-asset-block": (node: any) =>
+        `<img src="${node.data.target.fields.file.url}"/>`,
+    },
+  };
+
+  const pages = entries.items.map((item) => {
+    return {
+      params: { slug: item.fields.slug },
+      props: {
+        profilePhoto: (item.fields.image as any).fields.file.url,
+        name: item.fields.name,
+        slug: item.fields.slug,
+        position: item.fields.position,
+        brief: item.fields.brief,
+        email: item.fields.email,
+        phoneNumber: item.fields.phoneNumber,
+        qualifications: item.fields.qualifications,
+        overview: documentToHtmlString(item.fields.overview as any, options),
+        experience: documentToHtmlString(
+          item.fields.experience as any,
+          options
+        ),
+        publications: documentToHtmlString(
+          item.fields.publications as any,
+          options
+        ),
+      },
+    };
+  });
+
+  return pages;
+}
+
+const {
+  profilePhoto,
+  name,
+  position,
+  brief,
+  email,
+  phoneNumber,
+  qualifications,
+  overview,
+  experience,
+  publications,
+  slug,
+} = Astro.props;
+---
+
+<Layout
+  title="people"
+  description="Meet our people"
+  type="article"
+  image="https://i.postimg.cc/1XcQr7cz/logo-large.png"
+>
+  <div
+    class="mx-auto mt-20 flex max-w-screen-md flex-col gap-10 px-5 py-10 font-neuelight"
+  >
+    <section class="flex max-w-[80ch] flex-col gap-10 md:flex-row">
+      <Image
+        src={imageOptimizer(profilePhoto, 800, 800)}
+        alt={name as string}
+        height={imageHeight}
+        width={imageWidth}
+        class="mx-auto h-[500px] w-[350px] object-cover md:mx-0"
+      />
+
+      <div class="flex flex-col gap-3 text-secondary">
+        <h3 class="text-3xl font-bold">{name}</h3>
+        <h4 class="text-lg font-medium uppercase text-tertiary">{position}</h4>
+        <h5 class="font-bold mt-3">{qualifications}</h5>
+        <p class="text-justify font-light text-lg mb-3 text-gray-700">
+          {brief}
+        </p>
+
+        {
+          email && (
+            <div>
+              <h5 class="font-bold">Email Address</h5>
+              <a class="text-lg text-gray-700" href={`mailto:${email}`}>
+                {email}
+              </a>
+            </div>
+          )
+        }
+
+        {
+          phoneNumber && (
+            <div>
+              <h5 class="font-bold">Phone Number</h5>
+              <a class="text-lg text-gray-700" href={`tel:${phoneNumber}`}>
+                {phoneNumber}
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    <article class="flex flex-col gap-10">
+      <section>
+        <h3 class="article-heading">Overview</h3>
+        <Content content={overview} />
+      </section>
+
+      <section class="flex flex-col">
+        <h3 class="article-heading">Experience</h3>
+        <Content content={experience} />
+      </section>
+
+      {
+        publications && (
+          <section class="flex flex-col">
+            <h3 class="article-heading">Publications</h3>
+            <Content content={publications} />
+          </section>
+        )
+      }
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .article-heading {
+    @apply text-3xl font-bold text-secondary;
+  }
+</style>

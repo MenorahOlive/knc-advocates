@@ -14,11 +14,19 @@ const service = entry.items as any;
 //Assign the first policy to policy as there should only be one
 const services = service[0];
 
-const entries = await contentfulClient.getEntries({
-  content_type: "person",
-});
+export async function getStaticPaths({ paginate }: any) {
+  const entries = await contentfulClient.getEntries({
+    content_type: "person",
+  });
 
-const people = entries.items as any;
+  const people = entries.items as any;
+
+  return paginate(people, {
+    pageSize: 12,
+  });
+}
+
+const { page } = Astro.props as any;
 ---
 
 <SectionHeader
@@ -32,7 +40,7 @@ const people = entries.items as any;
         class="grid lg:grid-cols-3 gap-y-16 lg:gap-x-16 py-10 px-5 lg:px-10 max-w-[1500px] mx-auto"
       >
         {
-          people
+          page.data
             .sort((a, b) => a.fields.order - b.fields.order)
             .map((o) => (
               <PersonDetails
@@ -44,6 +52,7 @@ const people = entries.items as any;
                   src: o.fields.image.fields.file.url,
                   alt: o.fields.image.fields.title,
                 }}
+                slug={o.fields.slug}
               />
             ))
         }

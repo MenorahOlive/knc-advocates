@@ -3,6 +3,7 @@ import Image from "astro/components/Image.astro";
 import LinkedinIcon from "#assets/icons/linkedin-yellow.svg";
 import MailIcon from "#assets/icons/mail-yellow.svg";
 import PhoneIcon from "#assets/icons/phone-yellow.svg";
+import ArrowAngled from "#assets/icons/arrow-angled.svg"; // Import the arrow icon
 import imageOptimizer from "#lib/imageOptimizer";
 
 interface Props {
@@ -14,11 +15,23 @@ interface Props {
   linkedIn: string;
   email: string;
   phoneNumber: string;
+  slug: string;
 }
-const { name, image, linkedIn, email, phoneNumber } = Astro.props;
+const { name, image, linkedIn, email, phoneNumber, slug } = Astro.props;
 ---
 
 <li class="h-[500px] relative overflow-hidden group">
+  <!-- Arrow Icon Container -->
+  <a href={`/people/${slug}`}>
+    <div
+      class="absolute right-3 top-3 grid h-12 w-12 -translate-y-32 place-content-center rounded-full bg-secondary transition-transform duration-300 hover:scale-110 group-hover:translate-y-0"
+      style={{
+        zIndex: 10,
+      }}
+    >
+      <Image src={ArrowAngled} alt="Arrow angled" />
+    </div>
+  </a>
   <Image
     src={imageOptimizer(image.src, 800, 800)}
     alt={image.alt}
