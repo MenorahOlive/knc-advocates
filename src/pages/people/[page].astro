@@ -52,6 +52,7 @@ const { page } = Astro.props as any;
                   src: o.fields.image.fields.file.url,
                   alt: o.fields.image.fields.title,
                 }}
+                slug={o.fields.slug}
               />
             ))
         }

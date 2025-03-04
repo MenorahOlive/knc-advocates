@@ -5,7 +5,6 @@ import MailIcon from "#assets/icons/mail-yellow.svg";
 import PhoneIcon from "#assets/icons/phone-yellow.svg";
 import ArrowAngled from "#assets/icons/arrow-angled.svg"; // Import the arrow icon
 import imageOptimizer from "#lib/imageOptimizer";
-import Slug from "src/pages/people/[slug].astro";
 
 interface Props {
   name: string;
@@ -16,8 +15,9 @@ interface Props {
   linkedIn: string;
   email: string;
   phoneNumber: string;
+  slug: string;
 }
-const { name, image, linkedIn, email, phoneNumber } = Astro.props;
+const { name, image, linkedIn, email, phoneNumber, slug } = Astro.props;
 ---
 
 <li class="h-[500px] relative overflow-hidden group">
