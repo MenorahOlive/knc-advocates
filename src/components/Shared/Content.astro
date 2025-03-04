@@ -1,0 +1,13 @@
+---
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+---
+
+<div
+  set:html={content}
+  lang="en"
+  class="overflow-x-scroll border-b py-10 text-justify text-gray-700 prose-headings:pb-3 prose-headings:pt-5 prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:py-2 last:prose-p:mb-0 prose-a:text-primary prose-ol:ml-7 prose-ol:list-decimal prose-ul:ml-7 prose-ul:list-disc prose-th:font-bold prose-td:border prose-th:border prose-th:p-2 prose-td:p-2 prose-td:overflow-x-auto prose-th:min-w-32 sm:prose-th:min-w-44 prose-td:text-pretty prose-table:min-w-[800px] prose:hyphens-auto"
+/>
