@@ -70,27 +70,31 @@ const {
   type="article"
   image="https://i.postimg.cc/1XcQr7cz/logo-large.png"
 >
-  <div class="mx-auto flex max-w-screen-md flex-col gap-10 px-5 py-10">
+  <div
+    class="mx-auto mt-20 flex max-w-screen-md flex-col gap-10 px-5 py-10 font-neuelight"
+  >
     <section class="flex max-w-[80ch] flex-col gap-10 md:flex-row">
       <Image
-        src={imageOptimizer(profilePhoto, imageWidth, imageHeight)}
+        src={imageOptimizer(profilePhoto, 800, 800)}
         alt={name as string}
         height={imageHeight}
         width={imageWidth}
-        class="mx-auto h-[500px] w-[350px] rounded-3xl object-cover md:mx-0"
+        class="mx-auto h-[500px] w-[350px] object-cover md:mx-0"
       />
 
-      <div class="flex flex-col gap-5 text-secondary">
-        <h3 class="text-3xl font-medium">{name}</h3>
-        <h4 class="text-xl font-bold uppercase">{position}</h4>
-        <h5 class="font-bold">{qualifications}</h5>
-        <p class="text-justify font-light">{brief}</p>
+      <div class="flex flex-col gap-3 text-secondary">
+        <h3 class="text-3xl font-bold">{name}</h3>
+        <h4 class="text-lg font-medium uppercase text-tertiary">{position}</h4>
+        <h5 class="font-bold mt-3">{qualifications}</h5>
+        <p class="text-justify font-light text-lg mb-3 text-gray-700">
+          {brief}
+        </p>
 
         {
           email && (
             <div>
-              <h5>Email Address</h5>
-              <a class="text-lg" href={`mailto:${email}`}>
+              <h5 class="font-bold">Email Address</h5>
+              <a class="text-lg text-gray-700" href={`mailto:${email}`}>
                 {email}
               </a>
             </div>
@@ -100,8 +104,8 @@ const {
         {
           phoneNumber && (
             <div>
-              <h5>Phone Number</h5>
-              <a class="text-lg" href={`tel:${phoneNumber}`}>
+              <h5 class="font-bold">Phone Number</h5>
+              <a class="text-lg text-gray-700" href={`tel:${phoneNumber}`}>
                 {phoneNumber}
               </a>
             </div>
